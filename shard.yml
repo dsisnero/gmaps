@@ -1,0 +1,19 @@
+name: gmaps
+version: 0.1.0
+
+authors:
+  - dsisnero <dsisnero@gmail.com>
+
+crystal: 1.8.2
+
+targets:
+  nearest_hospitals:
+    main: src/nearest_hospitals.cr
+
+dependencies:
+  totem:
+    github: icyleaf/totem
+  poncho:
+    github: icyleaf/poncho
+
+license: MIT
