@@ -18,6 +18,8 @@ module Gmaps
     @[JSON::Field(key: "lng")]
     getter longitude : Float64
 
+    @[JSON::Field(key: next_page_token)]
+
     def initialize(@latitude, @longitude)
     end
   end
@@ -67,12 +69,14 @@ module Gmaps
   struct Place
     # getter geometry : Geometry
     include JSON::Serializable
+    include JSON::Serializable::Unmapped
     getter place_id : String
     getter vicinity : String
     getter name : String
+    getter rating : Float64?
     getter geometry : Gmaps::Geometry
 
-    def initialize(@place_id, @vicinity, @name, @geometry)
+    def initialize(@place_id, @vicinity, @name, @geometry, @rating)
     end
 
     def location
@@ -89,9 +93,8 @@ module Gmaps
 
     # getter results : Array(Place){ [] of Place}
 
-    getter next_page_token : String
-
     getter status : String
+    getter next_page_token : String?
 
     getter results : Array(Gmaps::Place)
 

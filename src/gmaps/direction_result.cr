@@ -1,5 +1,11 @@
 require "json"
+require "./lat_lon.cr"
 
+# Represents the result of a directions request to the Google Maps API.
+#
+# Contains geocoded waypoints and route information. The routes contain
+# legs, which have steps with turn-by-turn directions. Polylines encode
+# the paths between locations.
 module Gmaps
   struct GeocodedWaypoints
     include JSON::Serializable
@@ -25,26 +31,13 @@ module Gmaps
     def to_s(io)
       io << text
     end
-
-  end
-
-  record LatLon, lat : Float64, lng : Float64 do
-    include JSON::Serializable
-
-    def latitude
-      @lat
-    end
-
-    def longitude
-      @lng
-    end
-
   end
 
   struct GeoBounds
-  include JSON::Serializable
-    getter northeast : LatLon
-    getter southwest : LatLon
+    include JSON::Serializable
+
+    getter northeast : Location
+    getter southwest : Location
 
     def initialize(@northeast, @southwest)
     end
@@ -59,18 +52,18 @@ module Gmaps
 
     getter end_address : String
 
-    getter end_location : LatLon
+    getter end_location : Location
 
     getter start_address : String
 
-    getter start_location : LatLon
+    getter start_location : Location
 
     getter steps : Array(Step)
 
     def initialize(@distance, @duration, @end_address, @end_location, @start_address, @start_location, @steps)
     end
 
-    def print_leg(io : IO | String , heading_level : Int32 = 4)
+    def print_leg(io : IO | String, heading_level : Int32 = 4)
       io << "=" * heading_level + " Directions\n\n"
       io << "Starting Address: #{start_address}\n"
       io << "Ending Address: #{ending_address}\n"
@@ -79,12 +72,10 @@ module Gmaps
     end
 
     def print_steps(io)
-      steps.each do |step|
+      steps.each do |_|
         print_step(io)
       end
     end
-
-
   end
 
   struct Polyline
@@ -103,13 +94,13 @@ module Gmaps
 
     getter duration : StepValue
 
-    getter end_location : LatLon
+    getter end_location : Location
 
     getter html_instructions : String
 
     getter polyline : Polyline
 
-    getter start_location : LatLon
+    getter start_location : Location
 
     getter travel_mode : String
 
@@ -129,7 +120,6 @@ module Gmaps
 
     def print_route(io : IO | String)
     end
-
   end
 
   struct DirectionResult
@@ -139,6 +129,25 @@ module Gmaps
     getter routes : Array(Route)
 
     def initialize(@geocoded_waypoints, @routes)
+    end
+
+    # use the StaticMap class to get a static map of the routes
+    def get_static_map
+      StaticMap.build do |map|
+        @routes.each do |route|
+          route.legs.each do |leg|
+            leg.steps.each do |step|
+              map.add_marker(step.start_location)
+              map.add_marker(step.end_location)
+              map.add_polyline(step.polyline.points)
+            end
+          end
+
+          route.overview_polyline.decode.each do |latlng|
+            map.add_latlng(latlng)
+          end
+        end
+      end
     end
   end
 end

@@ -1,19 +1,16 @@
 {
-   "geocoded_waypoints" : 
-   [
+   "geocoded_waypoints": [
       {
-         "geocoder_status" : "OK",
-         "place_id" : "ChIJnykGkXRYUocRD1MgHH_zs60",
-         "types" : 
-         [
+         "geocoder_status": "OK",
+         "place_id": "ChIJnykGkXRYUocRD1MgHH_zs60",
+         "types": [
             "premise"
          ]
       },
       {
-         "geocoder_status" : "OK",
-         "place_id" : "ChIJ14_kWJ_1UocRb8t5J5dl5yQ",
-         "types" : 
-         [
+         "geocoder_status": "OK",
+         "place_id": "ChIJ14_kWJ_1UocRb8t5J5dl5yQ",
+         "types": [
             "establishment",
             "health",
             "hospital",
@@ -21,466 +18,385 @@
          ]
       }
    ],
-   "routes" : 
-   [
+   "routes": [
       {
-         "bounds" : 
-         {
-            "northeast" : 
-            {
-               "lat" : 40.8842969,
-               "lng" : -111.8515815
+         "bounds": {
+            "northeast": {
+               "lat": 40.8842969,
+               "lng": -111.8515815
             },
-            "southwest" : 
-            {
-               "lat" : 40.7714813,
-               "lng" : -111.919108
+            "southwest": {
+               "lat": 40.7714813,
+               "lng": -111.919108
             }
          },
-         "copyrights" : "Map data ©2023 Google",
-         "legs" : 
-         [
+         "copyrights": "Map data ©2023 Google",
+         "legs": [
             {
-               "distance" : 
-               {
-                  "text" : "12.4 mi",
-                  "value" : 19906
+               "distance": {
+                  "text": "12.4 mi",
+                  "value": 19906
                },
-               "duration" : 
-               {
-                  "text" : "23 mins",
-                  "value" : 1391
+               "duration": {
+                  "text": "23 mins",
+                  "value": 1391
                },
-               "end_address" : "8th Avenue, C St E, Salt Lake City, UT 84143, USA",
-               "end_location" : 
-               {
-                  "lat" : 40.7780955,
-                  "lng" : -111.8805577
+               "end_address": "8th Avenue, C St E, Salt Lake City, UT 84143, USA",
+               "end_location": {
+                  "lat": 40.7780955,
+                  "lng": -111.8805577
                },
-               "start_address" : "1390 Millbrook Way, Bountiful, UT 84010, USA",
-               "start_location" : 
-               {
-                  "lat" : 40.875048,
-                  "lng" : -111.8515815
+               "start_address": "1390 Millbrook Way, Bountiful, UT 84010, USA",
+               "start_location": {
+                  "lat": 40.875048,
+                  "lng": -111.8515815
                },
-               "steps" : 
-               [
+               "steps": [
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.9 mi",
-                        "value" : 1373
+                     "distance": {
+                        "text": "0.9 mi",
+                        "value": 1373
                      },
-                     "duration" : 
-                     {
-                        "text" : "2 mins",
-                        "value" : 140
+                     "duration": {
+                        "text": "2 mins",
+                        "value": 140
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.8791191,
-                        "lng" : -111.8648116
+                     "end_location": {
+                        "lat": 40.8791191,
+                        "lng": -111.8648116
                      },
-                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eMillbrook Way\u003c/b\u003e toward \u003cb\u003e1250\u003c/b\u003e/\u003cwbr/\u003e\u003cb\u003eCanyon Crest Dr\u003c/b\u003e",
-                     "polyline" : 
-                     {
-                        "points" : "alnxFj_uiTuARGBIFEL@NFx@F^@d@AxC?|D?l@VnAFhBA`A?x@Eh@Md@O^iBlCY^?@O`@ADQh@_@nAMn@EXARKfBOrCSzDATMfA]jCIz@IjAEx@Ev@Ed@CTCLABMd@Md@[~@GLGLIHKJKFKB[HeCAgA?"
+                     "html_instructions": "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eMillbrook Way\u003c/b\u003e toward \u003cb\u003e1250\u003c/b\u003e/\u003cwbr/\u003e\u003cb\u003eCanyon Crest Dr\u003c/b\u003e",
+                     "polyline": {
+                        "points": "alnxFj_uiTuARGBIFEL@NFx@F^@d@AxC?|D?l@VnAFhBA`A?x@Eh@Md@O^iBlCY^?@O`@ADQh@_@nAMn@EXARKfBOrCSzDATMfA]jCIz@IjAEx@Ev@Ed@CTCLABMd@Md@[~@GLGLIHKJKFKB[HeCAgA?"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.875048,
-                        "lng" : -111.8515815
+                     "start_location": {
+                        "lat": 40.875048,
+                        "lng": -111.8515815
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.6 mi",
-                        "value" : 1019
+                     "distance": {
+                        "text": "0.6 mi",
+                        "value": 1019
                      },
-                     "duration" : 
-                     {
-                        "text" : "2 mins",
-                        "value" : 109
+                     "duration": {
+                        "text": "2 mins",
+                        "value": 109
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.8821313,
-                        "lng" : -111.8761113
+                     "end_location": {
+                        "lat": 40.8821313,
+                        "lng": -111.8761113
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMill St\u003c/b\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "oeoxF`rwiTg@~DCNe@vDGd@QzAIn@Kz@It@YdCQ~AIr@a@lDQ~A[hCc@vDIl@Gx@Eb@ALEVEXGXCHOf@Ql@Wz@EJIRYt@Q^Q^IPKNKROXGHo@jA"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMill St\u003c/b\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "oeoxF`rwiTg@~DCNe@vDGd@QzAIn@Kz@It@YdCQ~AIr@a@lDQ~A[hCc@vDIl@Gx@Eb@ALEVEXGXCHOf@Ql@Wz@EJIRYt@Q^Q^IPKNKROXGHo@jA"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.8791191,
-                        "lng" : -111.8648116
+                     "start_location": {
+                        "lat": 40.8791191,
+                        "lng": -111.8648116
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.2 mi",
-                        "value" : 245
+                     "distance": {
+                        "text": "0.2 mi",
+                        "value": 245
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 33
+                     "duration": {
+                        "text": "1 min",
+                        "value": 33
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.8842834,
-                        "lng" : -111.876215
+                     "end_location": {
+                        "lat": 40.8842834,
+                        "lng": -111.876215
                      },
-                     "html_instructions" : "Continue onto \u003cb\u003eS 200 E\u003c/b\u003e",
-                     "polyline" : 
-                     {
-                        "points" : "ixoxFtxyiTOVEDE@E@iAAeAEgAAc@?oCA"
+                     "html_instructions": "Continue onto \u003cb\u003eS 200 E\u003c/b\u003e",
+                     "polyline": {
+                        "points": "ixoxFtxyiTOVEDE@E@iAAeAEgAAc@?oCA"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.8821313,
-                        "lng" : -111.8761113
+                     "start_location": {
+                        "lat": 40.8821313,
+                        "lng": -111.8761113
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "1.1 mi",
-                        "value" : 1739
+                     "distance": {
+                        "text": "1.1 mi",
+                        "value": 1739
                      },
-                     "duration" : 
-                     {
-                        "text" : "3 mins",
-                        "value" : 207
+                     "duration": {
+                        "text": "3 mins",
+                        "value": 207
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.8841761,
-                        "lng" : -111.8968585
+                     "end_location": {
+                        "lat": 40.8841761,
+                        "lng": -111.8968585
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e500 S\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003ePass by Einstein Bros. Bagels (on the right in 0.3 mi)\u003c/div\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "wepxFjyyiT?jF?fE?nC?bB?Z@dA?tB?r@?dA?x@?`@?B?n@?n@?j@@zA?~A?h@?T?dA?fA?`A?R?f@?lB?~A?fA?h@?p@?j@@`@?V?jC?h@?fC?J?pB?b@@lA?~@?T?t@?L?d@?L?jA@lBAzA?P?L@N?n@?v@@zC?zCCFCDAH?NAZAXAN@N?N@P@HFXBRBPBP?JAX?V?^?\\"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e500 S\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003ePass by Einstein Bros. Bagels (on the right in 0.3 mi)\u003c/div\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "wepxFjyyiT?jF?fE?nC?bB?Z@dA?tB?r@?dA?x@?`@?B?n@?n@?j@@zA?~A?h@?T?dA?fA?`A?R?f@?lB?~A?fA?h@?p@?j@@`@?V?jC?h@?fC?J?pB?b@@lA?~@?T?t@?L?d@?L?jA@lBAzA?P?L@N?n@?v@@zC?zCCFCDAH?NAZAXAN@N?N@P@HFXBRBPBP?JAX?V?^?\\"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.8842834,
-                        "lng" : -111.876215
+                     "start_location": {
+                        "lat": 40.8842834,
+                        "lng": -111.876215
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "3.7 mi",
-                        "value" : 5929
+                     "distance": {
+                        "text": "3.7 mi",
+                        "value": 5929
                      },
-                     "duration" : 
-                     {
-                        "text" : "3 mins",
-                        "value" : 198
+                     "duration": {
+                        "text": "3 mins",
+                        "value": 198
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.83480309999999,
-                        "lng" : -111.9156691
+                     "end_location": {
+                        "lat": 40.83480309999999,
+                        "lng": -111.9156691
                      },
-                     "html_instructions" : "Merge onto \u003cb\u003eI-15 S\u003c/b\u003e via the ramp on the \u003cb\u003eleft\u003c/b\u003e to \u003cb\u003eSalt Lake City\u003c/b\u003e",
-                     "maneuver" : "ramp-left",
-                     "polyline" : 
-                     {
-                        "points" : "cepxFjz}iTJf@@DBF@DBB@BFH@?DDHBLBB@B?J?n@IhAMdAKPCB?d@EPCTC\\CTCPCTCP?j@?NA@A@?@ALYhA@lA@hB@lA@tCBxA@~@?bA@zA@^?rA@Z@rA@p@?b@@R?Z?@?f@@^?fA@fA@n@@|@@~@@jA@l@@P?L@`@?r@B|@DzAJF?TBXBTBP@h@FTBF@L@TBRBLBF@TBTDRBTDTDRBLBt@LrAXl@LtA\\rA\\rA`@NHv@XNFLDPFTH\\L\\NVHRHPHTJFBHDx@\\JF\\Pf@TTJf@VPJDBLHTLPJf@Vh@\\LHf@XBBLHPLTLNLRLd@Z`@ZDBNLd@\\b@\\XTLJRN^\\d@^NNZV@BNJXXNJjAbARPLLx@p@xApAb@`@rAhAFDb@^b@`@HHHHLHLPVTf@b@NNr@j@lAdATR~@x@TRd@`@PPPL@@r@l@zBnB~AtA`@\\h@d@hB|AjAbAbA|@|@t@RRNJ|@v@t@n@VTp@l@j@d@LJZZ^Xt@p@b@^LJVT\\ZPNPNNLRPXV\\ZhA`A^Z\\XZVl@d@d@Z\\VZRr@b@XRZNTL^RPHRJXNFB^PZL^NXH`@LVHTHLDNFZHNBVHVFpAVx@LVFd@Fd@HP@J@RDh@FXBR@f@DXBP@TBR@@?P@T@T@T@H?J@T?T@T?^@H?T?h@?^@J?~@@P?X?N@Z?z@@B?T?h@@J?^@\\?J?j@?L@^?Z?`@@R?V?H?H?T?j@@V?jA@Z?l@?v@?`A@xA@Z@fA?dA@P?h@@n@?|@Ar@@N?"
+                     "html_instructions": "Merge onto \u003cb\u003eI-15 S\u003c/b\u003e via the ramp on the \u003cb\u003eleft\u003c/b\u003e to \u003cb\u003eSalt Lake City\u003c/b\u003e",
+                     "maneuver": "ramp-left",
+                     "polyline": {
+                        "points": "cepxFjz}iTJf@@DBF@DBB@BFH@?DDHBLBB@B?J?n@IhAMdAKPCB?d@EPCTC\\CTCPCTCP?j@?NA@A@?@ALYhA@lA@hB@lA@tCBxA@~@?bA@zA@^?rA@Z@rA@p@?b@@R?Z?@?f@@^?fA@fA@n@@|@@~@@jA@l@@P?L@`@?r@B|@DzAJF?TBXBTBP@h@FTBF@L@TBRBLBF@TBTDRBTDTDRBLBt@LrAXl@LtA\\rA\\rA`@NHv@XNFLDPFTH\\L\\NVHRHPHTJFBHDx@\\JF\\Pf@TTJf@VPJDBLHTLPJf@Vh@\\LHf@XBBLHPLTLNLRLd@Z`@ZDBNLd@\\b@\\XTLJRN^\\d@^NNZV@BNJXXNJjAbARPLLx@p@xApAb@`@rAhAFDb@^b@`@HHHHLHLPVTf@b@NNr@j@lAdATR~@x@TRd@`@PPPL@@r@l@zBnB~AtA`@\\h@d@hB|AjAbAbA|@|@t@RRNJ|@v@t@n@VTp@l@j@d@LJZZ^Xt@p@b@^LJVT\\ZPNPNNLRPXV\\ZhA`A^Z\\XZVl@d@d@Z\\VZRr@b@XRZNTL^RPHRJXNFB^PZL^NXH`@LVHTHLDNFZHNBVHVFpAVx@LVFd@Fd@HP@J@RDh@FXBR@f@DXBP@TBR@@?P@T@T@T@H?J@T?T@T?^@H?T?h@?^@J?~@@P?X?N@Z?z@@B?T?h@@J?^@\\?J?j@?L@^?Z?`@@R?V?H?H?T?j@@V?jA@Z?l@?v@?`A@xA@Z@fA?dA@P?h@@n@?|@Ar@@N?"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.8841761,
-                        "lng" : -111.8968585
+                     "start_location": {
+                        "lat": 40.8841761,
+                        "lng": -111.8968585
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.4 mi",
-                        "value" : 565
+                     "distance": {
+                        "text": "0.4 mi",
+                        "value": 565
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 22
+                     "duration": {
+                        "text": "1 min",
+                        "value": 22
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.8299483,
-                        "lng" : -111.9172667
+                     "end_location": {
+                        "lat": 40.8299483,
+                        "lng": -111.9172667
                      },
-                     "html_instructions" : "Take exit \u003cb\u003e312\u003c/b\u003e for \u003cb\u003eUS-89 S\u003c/b\u003e toward \u003cb\u003eBeck St\u003c/b\u003e",
-                     "maneuver" : "ramp-right",
-                     "polyline" : 
-                     {
-                        "points" : "opfxF|oajT^Z@?RBJ@B?VFd@LH@VJXHJDx@Zt@\\\\P@@pAl@\\NHDZLD@HDVHHBFBTFb@Lj@Jt@Lb@Fb@B@?`@BB?F?X?`@A\\An@K"
+                     "html_instructions": "Take exit \u003cb\u003e312\u003c/b\u003e for \u003cb\u003eUS-89 S\u003c/b\u003e toward \u003cb\u003eBeck St\u003c/b\u003e",
+                     "maneuver": "ramp-right",
+                     "polyline": {
+                        "points": "opfxF|oajT^Z@?RBJ@B?VFd@LH@VJXHJDx@Zt@\\\\P@@pAl@\\NHDZLD@HDVHHBFBTFb@Lj@Jt@Lb@Fb@B@?`@BB?F?X?`@A\\An@K"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.83480309999999,
-                        "lng" : -111.9156691
+                     "start_location": {
+                        "lat": 40.83480309999999,
+                        "lng": -111.9156691
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "2.8 mi",
-                        "value" : 4479
+                     "distance": {
+                        "text": "2.8 mi",
+                        "value": 4479
                      },
-                     "duration" : 
-                     {
-                        "text" : "3 mins",
-                        "value" : 199
+                     "duration": {
+                        "text": "3 mins",
+                        "value": 199
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7943637,
-                        "lng" : -111.9037577
+                     "end_location": {
+                        "lat": 40.7943637,
+                        "lng": -111.9037577
                      },
-                     "html_instructions" : "Continue onto \u003cb\u003eUS-89 S\u003c/b\u003e",
-                     "polyline" : 
-                     {
-                        "points" : "erexF|yajTrEy@|AYdASfB]VEVC\\CRA^At@@lABxXt@`BF|@DRBN@b@FVF\\FH@VH@?VJTJb@TNHTLh@`@\\Zf@b@^Zj@d@RLLHPJVNHDJDPHLFPF@@HBRFPFVFNB^D`@B`@BB?R?@@N?^@b@@`A@lBF|@BX@z@BtADX?r@?h@Ad@AXEpDO@?jDSjCQl@Cb@E`@CpCMxDQvBK~AGbBKXCNAn@MREJC^Kp@WTKVOf@Wf@[v@m@n@i@b@e@`AkAZa@x@eA\\k@Ja@FIFIFGJOf@u@|@iAJA@?x@gA`CaDfAyAdDwE`AoA|DkFrBgCvAoB~CcEzDcFZc@p@cA~@oAZ_@zCcEV]@AfBcCb@g@V]TWROLI"
+                     "html_instructions": "Continue onto \u003cb\u003eUS-89 S\u003c/b\u003e",
+                     "polyline": {
+                        "points": "erexF|yajTrEy@|AYdASfB]VEVC\\CRA^At@@lABxXt@`BF|@DRBN@b@FVF\\FH@VH@?VJTJb@TNHTLh@`@\\Zf@b@^Zj@d@RLLHPJVNHDJDPHLFPF@@HBRFPFVFNB^D`@B`@BB?R?@@N?^@b@@`A@lBF|@BX@z@BtADX?r@?h@Ad@AXEpDO@?jDSjCQl@Cb@E`@CpCMxDQvBK~AGbBKXCNAn@MREJC^Kp@WTKVOf@Wf@[v@m@n@i@b@e@`AkAZa@x@eA\\k@Ja@FIFIFGJOf@u@|@iAJA@?x@gA`CaDfAyAdDwE`AoA|DkFrBgCvAoB~CcEzDcFZc@p@cA~@oAZ_@zCcEV]@AfBcCb@g@V]TWROLI"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.8299483,
-                        "lng" : -111.9172667
+                     "start_location": {
+                        "lat": 40.8299483,
+                        "lng": -111.9172667
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "1.5 mi",
-                        "value" : 2468
+                     "distance": {
+                        "text": "1.5 mi",
+                        "value": 2468
                      },
-                     "duration" : 
-                     {
-                        "text" : "3 mins",
-                        "value" : 178
+                     "duration": {
+                        "text": "3 mins",
+                        "value": 178
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7759542,
-                        "lng" : -111.8910943
+                     "end_location": {
+                        "lat": 40.7759542,
+                        "lng": -111.8910943
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eUT-186 E\u003c/b\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "ws~wFne_jTBU@ABCFCLINKDAHKFODQ?[@K@I@GBGFMBCX_@fAuAF]fAwAv@eA~@gA^c@t@o@xAmA\\YROnB}A|D_DPMbAy@TQLK\\YPMtDwCtAgA|BkBlAaAhA_Av@u@b@e@j@s@TYTYFIhCoDnBoCt@_Aj@o@DGTUn@q@n@k@p@i@bAu@zAiAFEj@e@VKRO|@q@HGVQf@_@VIH?@ALAJAb@IJ@\\@L?D@F?H@F@D@FBFBB@B?JDFDVJLFHBDBF@D@H@PB\\Bp@FH?VBX@hBPH@x@FB@N@D?FBNB`@JPFbA\\rA`@B@`@L"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eUT-186 E\u003c/b\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "ws~wFne_jTBU@ABCFCLINKDAHKFODQ?[@K@I@GBGFMBCX_@fAuAF]fAwAv@eA~@gA^c@t@o@xAmA\\YROnB}A|D_DPMbAy@TQLK\\YPMtDwCtAgA|BkBlAaAhA_Av@u@b@e@j@s@TYTYFIhCoDnBoCt@_Aj@o@DGTUn@q@n@k@p@i@bAu@zAiAFEj@e@VKRO|@q@HGVQf@_@VIH?@ALAJAb@IJ@\\@L?D@F?H@F@D@FBFBB@B?JDFDVJLFHBDBF@D@H@PB\\Bp@FH?VBX@hBPH@x@FB@N@D?FBNB`@JPFbA\\rA`@B@`@L"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7943637,
-                        "lng" : -111.9037577
+                     "start_location": {
+                        "lat": 40.7943637,
+                        "lng": -111.9037577
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.1 mi",
-                        "value" : 211
+                     "distance": {
+                        "text": "0.1 mi",
+                        "value": 211
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 30
+                     "duration": {
+                        "text": "1 min",
+                        "value": 30
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7759085,
-                        "lng" : -111.8885905
+                     "end_location": {
+                        "lat": 40.7759085,
+                        "lng": -111.8885905
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e300 N\u003c/b\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "u`{wFhv|iT?i@?C?cB?uB?S?Q?]?yADa@@_@?K"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e300 N\u003c/b\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "u`{wFhv|iT?i@?C?cB?uB?S?Q?]?yADa@@_@?K"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7759542,
-                        "lng" : -111.8910943
+                     "start_location": {
+                        "lat": 40.7759542,
+                        "lng": -111.8910943
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.3 mi",
-                        "value" : 500
+                     "distance": {
+                        "text": "0.3 mi",
+                        "value": 500
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 73
+                     "duration": {
+                        "text": "1 min",
+                        "value": 73
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7715881,
-                        "lng" : -111.8883169
+                     "end_location": {
+                        "lat": 40.7715881,
+                        "lng": -111.8883169
                      },
-                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eN State St\u003c/b\u003e",
-                     "maneuver" : "turn-right",
-                     "polyline" : 
-                     {
-                        "points" : "m`{wFtf|iTFK@A?A?E@G?G@C@EBGBGHIfA?jB?B?^A`@?lC?b@?r@@jB@d@@^H@@H@^@D?Z?b@?b@?@?R?"
+                     "html_instructions": "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eN State St\u003c/b\u003e",
+                     "maneuver": "turn-right",
+                     "polyline": {
+                        "points": "m`{wFtf|iTFK@A?A?E@G?G@C@EBGBGHIfA?jB?B?^A`@?lC?b@?r@@jB@d@@^H@@H@^@D?Z?b@?b@?@?R?"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7759085,
-                        "lng" : -111.8885905
+                     "start_location": {
+                        "lat": 40.7759085,
+                        "lng": -111.8885905
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.3 mi",
-                        "value" : 541
+                     "distance": {
+                        "text": "0.3 mi",
+                        "value": 541
                      },
-                     "duration" : 
-                     {
-                        "text" : "2 mins",
-                        "value" : 95
+                     "duration": {
+                        "text": "2 mins",
+                        "value": 95
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7716965,
-                        "lng" : -111.8820601
+                     "end_location": {
+                        "lat": 40.7716965,
+                        "lng": -111.8820601
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e2nd Ave\u003c/b\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "mezwF~d|iTTA?WCSI_AGe@Gm@Gm@Cu@Ag@?MAs@?e@?C?k@?Q?O?M?[?}@?yA?o@?}A?_B@oC?{C"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003e2nd Ave\u003c/b\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "mezwF~d|iTTA?WCSI_AGe@Gm@Gm@Cu@Ag@?MAs@?e@?C?k@?Q?O?M?[?}@?yA?o@?}A?_B@oC?{C"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7715881,
-                        "lng" : -111.8883169
+                     "start_location": {
+                        "lat": 40.7715881,
+                        "lng": -111.8883169
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "0.4 mi",
-                        "value" : 632
+                     "distance": {
+                        "text": "0.4 mi",
+                        "value": 632
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 69
+                     "duration": {
+                        "text": "1 min",
+                        "value": 69
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7773791,
-                        "lng" : -111.882047
+                     "end_location": {
+                        "lat": 40.7773791,
+                        "lng": -111.882047
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eB St E\u003c/b\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "cfzwFz}ziTm@?oC?c@?wB?]?mAAc@?c@?kB?q@AiB?A?c@?qA?c@?a@?kB@A?a@?K?"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eB St E\u003c/b\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "cfzwFz}ziTm@?oC?c@?wB?]?mAAc@?c@?kB?q@AiB?A?c@?qA?c@?a@?kB@A?a@?K?"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7716965,
-                        "lng" : -111.8820601
+                     "start_location": {
+                        "lat": 40.7716965,
+                        "lng": -111.8820601
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "410 ft",
-                        "value" : 125
+                     "distance": {
+                        "text": "410 ft",
+                        "value": 125
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 20
+                     "duration": {
+                        "text": "1 min",
+                        "value": 20
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.777376,
-                        "lng" : -111.8805621
+                     "end_location": {
+                        "lat": 40.777376,
+                        "lng": -111.8805621
                      },
-                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003e7th Ave\u003c/b\u003e",
-                     "maneuver" : "turn-right",
-                     "polyline" : 
-                     {
-                        "points" : "si{wFx}ziT?kB?}D"
+                     "html_instructions": "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003e7th Ave\u003c/b\u003e",
+                     "maneuver": "turn-right",
+                     "polyline": {
+                        "points": "si{wFx}ziT?kB?}D"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.7773791,
-                        "lng" : -111.882047
+                     "start_location": {
+                        "lat": 40.7773791,
+                        "lng": -111.882047
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   },
                   {
-                     "distance" : 
-                     {
-                        "text" : "262 ft",
-                        "value" : 80
+                     "distance": {
+                        "text": "262 ft",
+                        "value": 80
                      },
-                     "duration" : 
-                     {
-                        "text" : "1 min",
-                        "value" : 18
+                     "duration": {
+                        "text": "1 min",
+                        "value": 18
                      },
-                     "end_location" : 
-                     {
-                        "lat" : 40.7780955,
-                        "lng" : -111.8805577
+                     "end_location": {
+                        "lat": 40.7780955,
+                        "lng": -111.8805577
                      },
-                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e at the 1st cross street onto \u003cb\u003eC St E\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
-                     "maneuver" : "turn-left",
-                     "polyline" : 
-                     {
-                        "points" : "si{wFntziT]?A?eA?A?c@?C?"
+                     "html_instructions": "Turn \u003cb\u003eleft\u003c/b\u003e at the 1st cross street onto \u003cb\u003eC St E\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+                     "maneuver": "turn-left",
+                     "polyline": {
+                        "points": "si{wFntziT]?A?eA?A?c@?C?"
                      },
-                     "start_location" : 
-                     {
-                        "lat" : 40.777376,
-                        "lng" : -111.8805621
+                     "start_location": {
+                        "lat": 40.777376,
+                        "lng": -111.8805621
                      },
-                     "travel_mode" : "DRIVING"
+                     "travel_mode": "DRIVING"
                   }
                ],
-               "traffic_speed_entry" : [],
-               "via_waypoint" : []
+               "traffic_speed_entry": [],
+               "via_waypoint": []
             }
          ],
-         "overview_polyline" : 
-         {
-            "points" : "alnxFj_uiT}AVIFEL@NFx@F^?~D?jFVnAFhBAzBEh@Md@O^iBlCY`@Qf@q@xBShAq@jMw@dH[bFGb@Oh@q@rBQVWRg@LmEAyAlLq@|FsDv[UbCMr@Sp@y@hCk@tA[p@o@fA_AbBKFoA?mCGsDA?rL@tI?hH@vK?nNBb]?vJBrG?zCCFENEtADz@RpAA|A?\\Jf@DLNV^LF@z@IdD]jBQnAK~@CN[vCBfLHtNHvSRtETvALtC\\bEn@`Cf@hDz@jDlAnDrAhEnBfE`CrChBnEfDpD~ChK~IxApAVRd@f@xDdDpCbC`KxIhVzSdDtCdDrClCpBdCzAzAv@|Ar@zAf@z@XrA^hB^pAThBTjBRrAJhCLvLLpJFhJDbGDz@@lBAbA@`@Zz@L`Bd@dA`@rAn@zBdAbA^f@NnAXxATjAF`BCfLsB~Bc@t@Gr@CbCDxXt@~CL~AT`ARl@Vr@^~@n@dA~@lBxA~@f@r@ZfAZrBPh@@rFLhFNlA?nACjEUlDS~F_@bPs@|BO~@O^IpAc@l@[nAs@fBwAdBqBtAgB\\k@Ja@NSRWdB_CJAdGcIfFgHpHsJnM{PhHwJdDkEl@u@`@YDWJG\\UNMLa@@g@BQJU\\c@fAuAF]~B}C~AkB`EgDvMkKvMmK`CuBnAyA|DmFdDoEp@w@dAgA`BuArEkDj@[fAy@~@q@`@I~@O|@D^DVHx@^\\JjBPdDVvAL~@RlDhA`@L?i@?gB?yD?yADa@@k@HUDYFOHIfA?nB?`AApIBd@@^HJBdB@nAACk@QeBO{AE}AAkB?{A@mUs]C{C@?iH_@?oB?"
+         "overview_polyline": {
+            "points": "alnxFj_uiT}AVIFEL@NFx@F^?~D?jFVnAFhBAzBEh@Md@O^iBlCY`@Qf@q@xBShAq@jMw@dH[bFGb@Oh@q@rBQVWRg@LmEAyAlLq@|FsDv[UbCMr@Sp@y@hCk@tA[p@o@fA_AbBKFoA?mCGsDA?rL@tI?hH@vK?nNBb]?vJBrG?zCCFENEtADz@RpAA|A?\\Jf@DLNV^LF@z@IdD]jBQnAK~@CN[vCBfLHtNHvSRtETvALtC\\bEn@`Cf@hDz@jDlAnDrAhEnBfE`CrChBnEfDpD~ChK~IxApAVRd@f@xDdDpCbC`KxIhVzSdDtCdDrClCpBdCzAzAv@|Ar@zAf@z@XrA^hB^pAThBTjBRrAJhCLvLLpJFhJDbGDz@@lBAbA@`@Zz@L`Bd@dA`@rAn@zBdAbA^f@NnAXxATjAF`BCfLsB~Bc@t@Gr@CbCDxXt@~CL~AT`ARl@Vr@^~@n@dA~@lBxA~@f@r@ZfAZrBPh@@rFLhFNlA?nACjEUlDS~F_@bPs@|BO~@O^IpAc@l@[nAs@fBwAdBqBtAgB\\k@Ja@NSRWdB_CJAdGcIfFgHpHsJnM{PhHwJdDkEl@u@`@YDWJG\\UNMLa@@g@BQJU\\c@fAuAF]~B}C~AkB`EgDvMkKvMmK`CuBnAyA|DmFdDoEp@w@dAgA`BuArEkDj@[fAy@~@q@`@I~@O|@D^DVHx@^\\JjBPdDVvAL~@RlDhA`@L?i@?gB?yD?yADa@@k@HUDYFOHIfA?nB?`AApIBd@@^HJBdB@nAACk@QeBO{AE}AAkB?{A@mUs]C{C@?iH_@?oB?"
          },
-         "summary" : "I-15 S",
-         "warnings" : [],
-         "waypoint_order" : []
+         "summary": "I-15 S",
+         "warnings": [],
+         "waypoint_order": []
       }
    ],
-   "status" : "OK"
+   "status": "OK"
 }

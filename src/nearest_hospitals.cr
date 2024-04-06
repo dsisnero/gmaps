@@ -2,25 +2,29 @@ require "poncho"
 require "option_parser"
 require "log"
 require "./gmaps/coordinate_parser"
-require "./gmaps/client"
+require "./gmaps/app"
+# require "./gmaps/client"
+
+ROOT = Path["."].parent.expand
 
 def print_help(parser : OptionParser)
   puts parser
 end
 
-ROOT = Path["."].parent
+def get_api_key
+  api_key = ENV["API_KEY"]?
 
-api_key = ENV["API_KEY"]?
+  unless api_key
+    poncho = Poncho.from_file (ROOT / ".env").expand.to_s
+    api_key = poncho["HOSPITAL_APP_KEY"]?
+  end
 
-unless api_key
-  poncho = Poncho.from_file (ROOT / ".env").expand.to_s
-  api_key = poncho["HOSPITAL_APP_KEY"]?
-end
-
-if api_key.nil? || api_key.empty?
-  puts "Error: API_KEY environment variable is missing."
-  puts "Please set the API_KEY environment variable before running the program."
-  exit(1)
+  if api_key.nil? || api_key.empty?
+    puts "Error: API_KEY environment variable is missing."
+    puts "Please set the API_KEY environment variable before running the program."
+    exit(1)
+  end
+  api_key
 end
 
 latitude = ""
@@ -48,37 +52,23 @@ parser = OptionParser.new do |parser|
   end
 end
 
-def parse_coordinates(lat : String?, lng : String?)
-  coordinates = Gmaps::CoordinateParser.parse_lat_lng(lat, lng)
+def get_route(origin : Gmaps::LatLon, destination : Gmaps::Hospital)
+  response = client.generate_directions_response(origin, destination)
+  if response.success?
+    result = Gmaps::DirectionResult.from_json(response.body)
+    {hospital, result.routes[0]}
+  end
 end
 
 begin
   parser.parse
   Log.debug { "after options parse lat: #{latitude}, lng: #{longitude}" }
-  coordinates = parse_coordinates(latitude, longitude)
+  key = get_api_key
+  app = Gmaps::App.new(key)
+
+  coordinates = app.parse_coordinates(latitude, longitude)
   if coordinates
-    Log.debug { "Coordinates parsed correctly" }
-    client = Gmaps::Client.new(api_key)
-    hospitals = client.find_nearest_hospitals(coordinates.latitude, coordinates.longitude)
-
-    # Get the two nearest hospitals
-    if hospitals.size > 0
-      nearest_hospitals = hospitals[0, 2]
-
-      # Generate map URLs with driving directions for each hospital
-      map_urls = nearest_hospitals.map do |hospital|
-        # {hospital, client.generate_directions_response(coordinates.latitude, coordinates.longitude, hospital.latitude, hospital.longitude) }
-        {hospital, client.generate_directions_response(coordinates, hospital)}
-      end
-
-      hospitals.each(&.display)
-
-      # Print the URLs
-      map_urls.each_with_index do |(hosp, resp), _|
-        File.write(hosp.name.downcase.gsub(" ", "_"), resp.body)
-        puts hosp.name
-      end
-    end
+    app.run(coordinates)
   else
     puts "No coordinates"
   end

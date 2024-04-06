@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "crystal: debug current file",
+            "preLaunchTask": "crystal: build current file (debug)",
+            "program": "${workspaceFolder}/bin/${fileBasenameNoExtension}.exe",
+            "stopOnEntry": true,
+            "args": [
+                "--latitude=40d52m30sN",
+                "--longitude=111d51m7sW"
+            ],
+            "cwd": "${workspaceFolder}",
+            "initCommands": [
+                "log enable lldb default"
+                "command script import \"c:/windows_home/.local/share/crystal/crystal_formatters.py\""
+            ]
+        }
+    ]
+}

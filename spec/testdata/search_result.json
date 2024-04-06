@@ -1,0 +1,917 @@
+{
+   "html_attributions": [],
+   "next_page_token": "ATplDJYOJdXGhatSCGeJ_Fu4-wUuP2-d1aMGhAf_x3cPrj88_zEmybrqvbqyy3WAp12f-Q48BkmVFJIcGEy7bO7F6L-GrDrs225bS_sPslVHVMPN1pBGxFSUQBT5ry_jmScdywcZr0jxi5O8bErzmp9JAECV6C4qi_Dpr5J323iLXI9hrej4n3UOKq9mAxFGIjagYBGAokd-BgZLnuh92sJYBv8inqU3h-STHIYycBPVCgDQwnfQwTHF-9yuKJ6q26ukIbUb9iK3_clEBz7Ss453qJuy0GGc58aXJJwxwpQbiB-ghMn10mSJzgfvnbVm93w3czImMM0vwMOSZU_XVHFQhE8d6SaI-vafj20ikDJOdRgUmN_-Wk3Q_CeN1Y3Ekkg2DcOBD_gHoSDP-WPfUh9jpwKrMKUe8OycFASW8A7tZVs4aT_8rYe9wdaM9hrc",
+   "results": [
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.5593714,
+               "lng": -123.2842942
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.5607138802915,
+                  "lng": -123.2828888197085
+               },
+               "southwest": {
+                  "lat": 44.5580159197085,
+                  "lng": -123.2855867802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan medical supply",
+         "place_id": "ChIJOfoP2h5BwFQRmfJ-vbc_IIo",
+         "plus_code": {
+            "compound_code": "HP58+P7 Corvallis, OR, USA",
+            "global_code": "84PRHP58+P7"
+         },
+         "reference": "ChIJOfoP2h5BwFQRmfJ-vbc_IIo",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "845 Southwest 30th Street, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.5606139,
+               "lng": -123.285752
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.5622296302915,
+                  "lng": -123.2841167697085
+               },
+               "southwest": {
+                  "lat": 44.5595316697085,
+                  "lng": -123.2868147302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/school_pinlet",
+         "name": "College of Veterinary Medicine",
+         "place_id": "ChIJQ7tQ6rlAwFQRVYsP2h7uGWs",
+         "plus_code": {
+            "compound_code": "HP67+6M Corvallis, OR, USA",
+            "global_code": "84PRHP67+6M"
+         },
+         "rating": 3.8,
+         "reference": "ChIJQ7tQ6rlAwFQRVYsP2h7uGWs",
+         "scope": "GOOGLE",
+         "types": [
+            "university",
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 9,
+         "vicinity": "Magruder Hall, 700 Southwest 30th Street, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.5893893,
+               "lng": -123.2662761
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.5908370802915,
+                  "lng": -123.2649289197085
+               },
+               "southwest": {
+                  "lat": 44.5881391197085,
+                  "lng": -123.2676268802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Good Samaritan hospital",
+         "place_id": "ChIJiZl1eAA_wFQRSjIskdoh3Xc",
+         "plus_code": {
+            "compound_code": "HPQM+QF Corvallis, OR, USA",
+            "global_code": "84PRHPQM+QF"
+         },
+         "reference": "ChIJiZl1eAA_wFQRSjIskdoh3Xc",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "1242 Northwest Maple Avenue, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.5920595,
+               "lng": -123.2765581
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.5934238802915,
+                  "lng": -123.2753938197085
+               },
+               "southwest": {
+                  "lat": 44.5907259197085,
+                  "lng": -123.2780917802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Rejuvenation Medical Center",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 560,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118431877160020191250\"\u003eRejuvenation Medical Center\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJar2k5u5bEkB5dJeaN_N2Hlh8ujqcc-PQapYMSd1US4mUr-YnWwaFSa6uKjqNLcJpKWGDWQqcTjD5G1PbmN_1VY3o_Ib1vU_2R_loK9V_UnfmF-SRszm6tXQ9roo4JZS86lS17JlpUD6c0ArO-xwIYDdYb2UWAdmMw7j3KGVY4lIxF2",
+               "width": 1920
+            }
+         ],
+         "place_id": "ChIJx8FK_nk_wFQRuZqsqOcVUnk",
+         "plus_code": {
+            "compound_code": "HPRF+R9 Corvallis, OR, USA",
+            "global_code": "84PRHPRF+R9"
+         },
+         "reference": "ChIJx8FK_nk_wFQRuZqsqOcVUnk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "2211 Northwest Professional Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6005018,
+               "lng": -123.2538965
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6019626302915,
+                  "lng": -123.2527644197085
+               },
+               "southwest": {
+                  "lat": 44.5992646697085,
+                  "lng": -123.2554623802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Willamette Valley Cancer Institute and Research Center - Corvallis",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 406,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/108243522352536548845\"\u003eWillamette Valley Cancer Institute and Research Center - Corvallis\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJbkDhgq8J4OV9R3_8apr_6hPpq0J41gD0bq5Qp2wAF0YxtbDGCKjUgXUxq71ZcOh3W8vtvVkvMjhYW9014Y64iJTNz-SZn78c7VGrg6JibpmCL3AAn1adshQhCzKtlECtj9b4lmYvdYbTVS4v1oSlEWPX7okSS328e3gR-H_w9BcJ28",
+               "width": 720
+            }
+         ],
+         "place_id": "ChIJgZW7H1Q_wFQRS7vg7CPt6Sk",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 3.7,
+         "reference": "ChIJgZW7H1Q_wFQRS7vg7CPt6Sk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 3,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.600568,
+               "lng": -123.2539655
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.60199553029149,
+                  "lng": -123.2527994697085
+               },
+               "southwest": {
+                  "lat": 44.59929756970849,
+                  "lng": -123.2554974302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "David Hufnagel, DO",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 393,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/101274835880381160998\"\u003eDavid Hufnagel, DO\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJbHx_WVW2QbaT2k-2QAwQpYxctAdCI4fJmyI4ZkWCsQ2AzNCJH3WGm0iabvMRbFVDxWFSgo1KjTZID1QuTVvFe_RgoAex6m925RM6VNWZQVct9fLHOIhofTQRIMkYEN9wy-Wk1_eVZBcgtbJuXdKq4__UzUI9neSa6P-iz9SZ61viwM",
+               "width": 700
+            }
+         ],
+         "place_id": "ChIJs13c0ZM_wFQR0uYAg3ZCKjA",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 5,
+         "reference": "ChIJs13c0ZM_wFQR0uYAg3ZCKjA",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 1,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.600568,
+               "lng": -123.2539655
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6019958802915,
+                  "lng": -123.2527988197085
+               },
+               "southwest": {
+                  "lat": 44.5992979197085,
+                  "lng": -123.2554967802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Matthew Lonergan, MD",
+         "photos": [
+            {
+               "height": 421,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102490527381431847242\"\u003eMatthew Lonergan, MD\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJblJ5zpEgoYpWATaJvbjGLgIac70XdgwSOBlsKkkPyplBmZhKgHv5hsOAj6830tIPiy3pJ5s0RDYS2FBy0SGlkn5KS8jsIko1hxrAuscNPR8Hbt_sDgbLQiD1sTu1_sKxKXtlsD7XHfisfSMEWdaY0mBZITKGwlAsCea-iJSkstLP_Y",
+               "width": 750
+            }
+         ],
+         "place_id": "ChIJXcODl8w_wFQRaXuhJDS3BLk",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 4.8,
+         "reference": "ChIJXcODl8w_wFQRaXuhJDS3BLk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 4,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.600568,
+               "lng": -123.2539655
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6019958802915,
+                  "lng": -123.2527988197085
+               },
+               "southwest": {
+                  "lat": 44.5992979197085,
+                  "lng": -123.2554967802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Jeff P. Sharman, MD",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 422,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/110995176039493139518\"\u003eJeff P. Sharman, MD\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJaYtYlsQpv1HZbvDvA_jz7oiDqn5gmoYWsrREahc334SsuDLX8rtdr2Df3x8JGo6RtOp6Y-aPMpSpHP16Eem5gHmOFu5TLiHWcsVDtOK637HnfPVMUO1rSZC3SLYOIhOCZRIiE-P4DGquhYHIpwQ8A2y5CHW6dVf-Hyo7TKluc1MCjU",
+               "width": 750
+            }
+         ],
+         "place_id": "ChIJ5ztnUYg_wFQRPozn3YEMB0U",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 4.2,
+         "reference": "ChIJ5ztnUYg_wFQRPozn3YEMB0U",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 5,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.600568,
+               "lng": -123.2539655
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6019958802915,
+                  "lng": -123.2527988197085
+               },
+               "southwest": {
+                  "lat": 44.5992979197085,
+                  "lng": -123.2554967802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Kathleen Y. Yang, MD",
+         "photos": [
+            {
+               "height": 422,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/109211103815755705603\"\u003eKathleen Y. Yang, MD\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJY7q0CfhFixzD0mTBplI8zwCQs11SITym29hsvrMam2KzYGisPHmvgeuHht8GcIIKr_sKrFVigvXKri34o8fvYVvoNLsTm4PyINmS4lAm34TiTdvvcdYHKpmNDbmEpqn3yh9uGND5TtnyXJl7tlRAGgxaiBQuuWUOGh0xtopik67wrb",
+               "width": 750
+            }
+         ],
+         "place_id": "ChIJf6kR8mk_wFQRNeIGjInm-zk",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 5,
+         "reference": "ChIJf6kR8mk_wFQRNeIGjInm-zk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 3,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.600568,
+               "lng": -123.2539655
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6019961302915,
+                  "lng": -123.2527986697085
+               },
+               "southwest": {
+                  "lat": 44.5992981697085,
+                  "lng": -123.2554966302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Jonathan Gross, MD",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 421,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/104472678528068635426\"\u003eJonathan Gross, MD\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJbKTTdpT0Fv05xu376C26VyjHz70mSlKbP5XP24S98sls-K8gCU7soKrV0a4Jk1euhJLWv7oCPYRJn0nzR6YRP8hAuggSJDcUqsFAYKKr86BqeDv6AX51CNT5HCvo-uFCp0agy-jixfUysrWWeerKnm6co7i1pg9P4NTdrMsPjs6hfM",
+               "width": 750
+            }
+         ],
+         "place_id": "ChIJ3y80O5s_wFQRt2APcaBBun0",
+         "plus_code": {
+            "compound_code": "JP2W+6C Corvallis, OR, USA",
+            "global_code": "84PRJP2W+6C"
+         },
+         "rating": 4.8,
+         "reference": "ChIJ3y80O5s_wFQRt2APcaBBun0",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 38,
+         "vicinity": "444 Northwest Elks Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.602565,
+               "lng": -123.253774
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6039963802915,
+                  "lng": -123.2525041697085
+               },
+               "southwest": {
+                  "lat": 44.6012984197085,
+                  "lng": -123.2552021302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan Heart Center",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJL1_7uJM_wFQRMM8AfxIC7ak",
+         "plus_code": {
+            "compound_code": "JP3W+2F Corvallis, OR, USA",
+            "global_code": "84PRJP3W+2F"
+         },
+         "rating": 3,
+         "reference": "ChIJL1_7uJM_wFQRMM8AfxIC7ak",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 2,
+         "vicinity": "& 100B, 3640 Northwest Samaritan Drive Suites 100A, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.60264790000001,
+               "lng": -123.2527309
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6039574302915,
+                  "lng": -123.2513123197085
+               },
+               "southwest": {
+                  "lat": 44.6012594697085,
+                  "lng": -123.2540102802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan Medical Group Osteopathic Medicine - Corvallis",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJu6VWnOM_wFQR62fh2nfECzY",
+         "plus_code": {
+            "compound_code": "JP3W+3W Corvallis, OR, USA",
+            "global_code": "84PRJP3W+3W"
+         },
+         "reference": "ChIJu6VWnOM_wFQR62fh2nfECzY",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "3620 Northwest Samaritan Drive #203A, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.60320809999999,
+               "lng": -123.2528064
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6044448302915,
+                  "lng": -123.2518955697085
+               },
+               "southwest": {
+                  "lat": 44.6017468697085,
+                  "lng": -123.2545935302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Good Samaritan Regional Medical Center",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 1737,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/117381038817819421390\"\u003eGood Samaritan Regional Medical Center\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJZlgmhuztZ4wIGKuZ_zpbCJwCJLbQXeUIl9-0zx3w2OeG0zuRKPw_k53QA7hwGIYd-Q-c_hYy8IVnsIWOyBVz2KMI2saavbRqbJ20ednhqwFrT5GWTpM0TFsOU5pUtqqesLu2tItL150vbv3761pbf99iuQtrcMsQuM1LMwr3a37cwv",
+               "width": 3600
+            }
+         ],
+         "place_id": "ChIJL1_7uJM_wFQRfQ_rle0M0tM",
+         "plus_code": {
+            "compound_code": "JP3W+7V Corvallis, OR, USA",
+            "global_code": "84PRJP3W+7V"
+         },
+         "rating": 2.7,
+         "reference": "ChIJL1_7uJM_wFQRfQ_rle0M0tM",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 201,
+         "vicinity": "3600 Northwest Samaritan Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6032694,
+               "lng": -123.2527123
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6045510302915,
+                  "lng": -123.2516617697085
+               },
+               "southwest": {
+                  "lat": 44.6018530697085,
+                  "lng": -123.2543597302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan Health Services",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJV-PIp5FAwFQR8SFMbPiZBYk",
+         "plus_code": {
+            "compound_code": "JP3W+8W Corvallis, OR, USA",
+            "global_code": "84PRJP3W+8W"
+         },
+         "rating": 2.4,
+         "reference": "ChIJV-PIp5FAwFQR8SFMbPiZBYk",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 32,
+         "vicinity": "3600 Northwest Samaritan Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6032002,
+               "lng": -123.2523036
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6045510302915,
+                  "lng": -123.2514574197085
+               },
+               "southwest": {
+                  "lat": 44.6018530697085,
+                  "lng": -123.2541553802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Primary HAM site",
+         "place_id": "ChIJD3sEsJM_wFQRsmqMxQ14cp0",
+         "plus_code": {
+            "compound_code": "JP3X+73 Corvallis, OR, USA",
+            "global_code": "84PRJP3X+73"
+         },
+         "reference": "ChIJD3sEsJM_wFQRsmqMxQ14cp0",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "3600 Northwest Samaritan Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6034924,
+               "lng": -123.2536789
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.60499668029149,
+                  "lng": -123.2523884197085
+               },
+               "southwest": {
+                  "lat": 44.6022987197085,
+                  "lng": -123.2550863802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan Kidney Specialists - Corvallis",
+         "opening_hours": {
+            "open_now": true
+         },
+         "place_id": "ChIJj0X0lZM_wFQRpFIlF1DLglI",
+         "plus_code": {
+            "compound_code": "JP3W+9G Corvallis, OR, USA",
+            "global_code": "84PRJP3W+9G"
+         },
+         "rating": 3,
+         "reference": "ChIJj0X0lZM_wFQRpFIlF1DLglI",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "user_ratings_total": 4,
+         "vicinity": "3615 Northwest Samaritan Drive #203, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.60352109999999,
+               "lng": -123.2521485
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.60475838029149,
+                  "lng": -123.2511652697085
+               },
+               "southwest": {
+                  "lat": 44.6020604197085,
+                  "lng": -123.2538632302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Good Sam parking",
+         "place_id": "ChIJIdoLel0_wFQR7rWm9Xleh1A",
+         "plus_code": {
+            "compound_code": "JP3X+C4 Corvallis, OR, USA",
+            "global_code": "84PRJP3X+C4"
+         },
+         "reference": "ChIJIdoLel0_wFQR7rWm9Xleh1A",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "3580 Northwest Samaritan Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6035598,
+               "lng": -123.2482626
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6049041302915,
+                  "lng": -123.2471556697085
+               },
+               "southwest": {
+                  "lat": 44.6022061697085,
+                  "lng": -123.2498536302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Samaritan Professional Center",
+         "place_id": "ChIJBcdy2pI_wFQRyp6SAJJpqjM",
+         "plus_code": {
+            "compound_code": "JQ32+CM Corvallis, OR, USA",
+            "global_code": "84PRJQ32+CM"
+         },
+         "reference": "ChIJBcdy2pI_wFQRyp6SAJJpqjM",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "3517 Northwest Samaritan Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6377453,
+               "lng": -123.2662591
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6391904802915,
+                  "lng": -123.2650812197085
+               },
+               "southwest": {
+                  "lat": 44.6364925197085,
+                  "lng": -123.2677791802915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+         "icon_background_color": "#F88181",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/hospital-H_pinlet",
+         "name": "Dr. Alan Kadish",
+         "opening_hours": {
+            "open_now": true
+         },
+         "photos": [
+            {
+               "height": 494,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/111172389998855714973\"\u003eDr. Alan Kadish\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJb0yqAOHxozjm4-e4RKRr4Ye1w19GkRuCkxayQLCLdgMNO6_unxjPmzNcnZkn0eQ2PJ03Qd-d7XtQxHRV5tuawalhfwC1uLNYjlqAYcbaTGq-gXmvUcOeIrgF8iVVjbsmJpduMD0KSOD_3413ZxC0-1VqEo-fdQtqzRYqDG2u0bMT1B",
+               "width": 509
+            }
+         ],
+         "place_id": "ChIJSRtLGnR6z1QRiHZT7puqPhY",
+         "plus_code": {
+            "compound_code": "JPQM+3F Corvallis, OR, USA",
+            "global_code": "84PRJPQM+3F"
+         },
+         "reference": "ChIJSRtLGnR6z1QRiHZT7puqPhY",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "6455 Northwest Concord Drive, Corvallis"
+      },
+      {
+         "business_status": "OPERATIONAL",
+         "geometry": {
+            "location": {
+               "lat": 44.6160137,
+               "lng": -123.1148614
+            },
+            "viewport": {
+               "northeast": {
+                  "lat": 44.6173650302915,
+                  "lng": -123.1133803697085
+               },
+               "southwest": {
+                  "lat": 44.6146670697085,
+                  "lng": -123.1160783302915
+               }
+            }
+         },
+         "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color": "#7B9EB0",
+         "icon_mask_base_uri": "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name": "Keith R. Wells, MD",
+         "opening_hours": {
+            "open_now": false
+         },
+         "photos": [
+            {
+               "height": 337,
+               "html_attributions": [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102889098761483876292\"\u003eKeith R. Wells, MD\u003c/a\u003e"
+               ],
+               "photo_reference": "ATplDJZT5wAp_xOSSsd08YnQuBsiNBg5Yo_1AQg5XX0mmRUwHgD6j6FxHMBVJWikv-LwC7BRW7UhKyGpXG_5N6qfXOw4LCUGw4lu2vrnl-jm2GCAo7OG0Nk2fWPy25z8sNcJHmB1tqnUNw34KEzu0wfTIgth6YNiz2h_30xbaeRLeGxTs0fJ",
+               "width": 600
+            }
+         ],
+         "place_id": "ChIJ95KgnGJrwFQRP1Ku0aUF8cg",
+         "plus_code": {
+            "compound_code": "JV8P+C3 Albany, OR, USA",
+            "global_code": "84PRJV8P+C3"
+         },
+         "reference": "ChIJ95KgnGJrwFQRP1Ku0aUF8cg",
+         "scope": "GOOGLE",
+         "types": [
+            "hospital",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+         ],
+         "vicinity": "2615 Willetta Street Southwest, Albany"
+      }
+   ],
+   "status": "OK"
+}

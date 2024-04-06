@@ -34,19 +34,27 @@ module Gmaps
     getter longitude : Float64
     getter address : String
     getter distance : Float64
+    getter rating : Float64?
+    getter extra = Hash(String, JSON::Any).new
 
-    def initialize(@name : String, @place_id, @latitude : Float64, @longitude : Float64, @address : String, @distance : Float64 = 0.0)
+    def initialize(@name : String, @place_id, @latitude : Float64, @longitude : Float64, @address : String, @distance : Float64 = 0.0, @rating = nil)
     end
 
     def display
-      puts name
-      puts "\naddress"
-      puts "distance: #{distance}\n"
+      puts "name: #{name}"
+      puts "address #{address}"
+      puts "distance: #{distance}"
+      if rating
+        puts "rating #{rating}\n"
+      else
+        puts "\n"
+      end
     end
   end
 
   class Client
     include GeoFuncs
+    Log = ::Log.for("geo_client")
 
     getter http_client : HTTP::Client
     getter api_key : String
@@ -58,18 +66,26 @@ module Gmaps
 
     def find_nearest_hospitals(lat : Float64, long : Float64) : Array(Hospital)
       response = get_nearest_hospitals_as_json(lat, long)
+      Log.info { "response\n#{response}" }
       File.write("result.json", response.body)
       extract_hospitals(response.body)
     end
 
+    def find_nearest_hospitals(location : Gmaps::Locatable)
+      find_nearest_hospitals(location.latitude, location.longitude)
+    end
+
     # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.56908,-116.92226&radius=5000&types=hospital&key=AIzaSyC4P-wFp5NJkICEG7gD6QpHF6Kf4IKgHko
     def get_nearest_hospitals_as_json(lat : Float64, long : Float64) : HTTP::Client::Response
-      url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&radius=5000&types=hospital&key=#{@api_key}"
-      Log.debug { "calling client with #{url}" }
-      http_client.get("/maps/api/place/nearbysearch/json?location=#{lat},#{long}&radius=170000&types=hospital&key=#{@api_key}")
-    rescue ex
-      Log.error { ex.message }
-      raise ex
+      url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"
+      Log.info { "calling client with #{url}" }
+      resp = http_client.get(url)
+      if resp.success?
+        resp
+      else
+        Log.error { "Gmap api call unsuccessful returned body: #{resp.body}" }
+        raise "Failed to fetch hospital information using google maps api #{resp.body}"
+      end
     end
 
     def extract_hospitals(json_result : String) : Array(Hospital)
@@ -82,7 +98,8 @@ module Gmaps
       places = result.results
       places.each do |place|
         loc = place.location
-        hospitals << Hospital.new(name: place.name, place_id: place.place_id, latitude: loc.latitude, longitude: loc.longitude, address: place.vicinity)
+        hospitals << Hospital.new(name: place.name, place_id: place.place_id,
+          latitude: loc.latitude, longitude: loc.longitude, address: place.vicinity, rating: place.rating)
       end
 
       # results.each do |result|
@@ -100,14 +117,8 @@ module Gmaps
 
     def generate_directions_response(origin : Gmaps::LatLon, destination : Gmaps::Hospital) : HTTP::Client::Response
       url = "/maps/api/directions/json?origin=#{origin.latitude},#{origin.longitude}&destination=place_id:#{destination.place_id}&key=#{api_key}"
-      Log.debug { "calling client with #{url}" }
+      Log.info { "getting directions by calling client with #{url}" }
       resp = http_client.get(url)
-      puts resp.body
-      puts
-      resp
-    rescue ex
-      Log.error { ex.message }
-      raise ex
     end
 
     def generate_directions_response(origin_lat : Float64, origin_long : Float64, dest_lat : Float64, dest_long : Float64) : HTTP::Client::Response

@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "crystal: build current file (debug)",
+            "type": "shell",
+            "command": "crystal",
+            "args": [
+                "build",
+                "--debug",
+                "${relativeFile}",
+                "-o",
+                "bin/${fileBasenameNoExtension}.exe"
+            ]
+        },
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "cmd.exe",
+            "args": [
+                "/C",
+                "echo",
+                "${workspaceFolder} : ${command:extension.commandvariable.workspace.folderPosix}"
+            ]
+        }
+    ]
+}

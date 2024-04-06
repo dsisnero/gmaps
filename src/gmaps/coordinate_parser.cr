@@ -1,12 +1,29 @@
 require "set"
+require "log"
+require "./lat_lon"
 
 module Gmaps
-  record LatLon, latitude = 0.0, longitude = 0.0
-
   class ParseException < Exception
   end
 
+  # Parses geographic coordinates in various formats and returns a LatLon value.
+  #
+  # Supports formats like:
+  #
+  # * Degrees Minutes Seconds (DMS): 41°24'12.2"N 2°10'26.5"E
+  # * Degrees Minutes (DM): 41°24.2'N 2°10.4'E
+  # * Decimal Degrees (DD): 41.40333 2.17403
+  #
+  # Latitude ranges from -90 to 90. Longitude ranges from -180 to 180.
+  #
+  # Can raise a ParseException on invalid input.
+  # Some Examples of usage:
+  # CoordinateParser.parse("41°24'12.2"N 2°10'26.5"E")
+  # CoordinateParser.parse("41.40333 2.17403")
+  # CoordinateParser.parse("41°24.2'N 2°10.4'E")
+  # CoordinateParser.parse("41.40333 2.17403")
   class CoordinateParser
+    Log = ::Log.for("coord_parser")
     DMS = "\\s*(\\d{1,3})\\s*(?:°|d|º| |g|o)" +
           "\\s*([0-6]?\\d)\\s*(?:'|m| |´|’|′)" +
           "\\s*(?:" +
@@ -42,6 +59,7 @@ module Gmaps
     end
 
     def parse_lat_lng(latitude : String, longitude : String) : LatLon
+      Log.info { "parsing lat:#{latitude} : lng : #{longitude}" }
       if latitude.nil? || latitude.empty? || longitude.nil? || longitude.empty?
         raise ParseException.new("nil or empty coordinates lat #{latitude} long #{longitude}")
       end
