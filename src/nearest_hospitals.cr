@@ -1,30 +1,11 @@
-require "poncho"
+require "./app"
 require "option_parser"
 require "log"
-require "./gmaps/coordinate_parser"
-require "./gmaps/app"
-# require "./gmaps/client"
 
-ROOT = Path["."].parent.expand
+# require "./gmaps/client"
 
 def print_help(parser : OptionParser)
   puts parser
-end
-
-def get_api_key
-  api_key = ENV["API_KEY"]?
-
-  unless api_key
-    poncho = Poncho.from_file (ROOT / ".env").expand.to_s
-    api_key = poncho["HOSPITAL_APP_KEY"]?
-  end
-
-  if api_key.nil? || api_key.empty?
-    puts "Error: API_KEY environment variable is missing."
-    puts "Please set the API_KEY environment variable before running the program."
-    exit(1)
-  end
-  api_key
 end
 
 latitude = ""
@@ -63,7 +44,7 @@ end
 begin
   parser.parse
   Log.debug { "after options parse lat: #{latitude}, lng: #{longitude}" }
-  key = get_api_key
+  key = Gmaps.get_api_key
   app = Gmaps::App.new(key)
 
   coordinates = app.parse_coordinates(latitude, longitude)

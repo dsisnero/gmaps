@@ -40,6 +40,16 @@ module Gmaps
     def initialize(@name : String, @place_id, @latitude : Float64, @longitude : Float64, @address : String, @distance : Float64 = 0.0, @rating = nil)
     end
 
+    def address_lines
+      address.split(",").map(&.strip)
+    end
+
+    def address_to_adoc(io : IO)
+      address_line_string = address_lines.join(" +\n")
+      io << "#{name} +\n"
+      io << "#{address_line_string}"
+    end
+
     def display
       puts "name: #{name}"
       puts "address #{address}"

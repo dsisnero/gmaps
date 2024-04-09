@@ -1,5 +1,6 @@
 require "json"
 require "./lat_lon.cr"
+require "./static_map"
 
 # Represents the result of a directions request to the Google Maps API.
 #
@@ -71,20 +72,22 @@ module Gmaps
       print_steps(io)
     end
 
+    #
+
     def print_steps(io)
       steps.each do |_|
         print_step(io)
       end
     end
+
+    # output the  polyline  for the leg to udr in  google static map api
   end
 
   struct Polyline
     include JSON::Serializable
 
-    getter points : String
-
-    def initialize(@points)
-    end
+    @[JSON::Field(key: "points")]
+    property encoded_points : String
   end
 
   class Step
@@ -115,10 +118,17 @@ module Gmaps
 
     getter legs : Array(Leg)
 
-    def initialize(@bounds, @legs)
+    getter overview_polyline : Polyline
+
+    def initialize(@bounds, @legs, @overview_polyline)
     end
 
     def print_route(io : IO | String)
+    end
+
+    # output a path string for the route to use in google static map api
+    def path_string(weight : Int32 = 5, color : String = "blue")
+      "weight:#{weight}|color:#{color}|enc:#{overview_polyline.encoded_points}"
     end
   end
 
@@ -132,21 +142,25 @@ module Gmaps
     end
 
     # use the StaticMap class to get a static map of the routes
-    def get_static_map
+    def build_static_map(size : String = "640x640")
       StaticMap.build do |map|
-        @routes.each do |route|
-          route.legs.each do |leg|
-            leg.steps.each do |step|
-              map.add_marker(step.start_location)
-              map.add_marker(step.end_location)
-              map.add_polyline(step.polyline.points)
-            end
-          end
+        map.size = size
+        map.center = @geocoded_waypoints[0].place_id
 
-          route.overview_polyline.decode.each do |latlng|
-            map.add_latlng(latlng)
-          end
+        @routes.each do |route|
+          map.add_route_overlay(route)
         end
+      end
+    end
+
+    def fetch_static_map(size : String = "640x640", format : String = "png", api_key : String? = nil)
+      map = build_static_map(size)
+      map.format = format
+      result = map.fetch(api_key: api_key)
+      if result.success?
+        result.body
+      else
+        nil
       end
     end
   end
