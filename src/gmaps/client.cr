@@ -76,8 +76,6 @@ module Gmaps
 
     def find_nearest_hospitals(lat : Float64, long : Float64) : Array(Hospital)
       response = get_nearest_hospitals_as_json(lat, long)
-      Log.info { "response\n#{response}" }
-      File.write("result.json", response.body)
       extract_hospitals(response.body)
     end
 
@@ -87,8 +85,9 @@ module Gmaps
 
     # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.56908,-116.92226&radius=5000&types=hospital&key=AIzaSyC4P-wFp5NJkICEG7gD6QpHF6Kf4IKgHko
     def get_nearest_hospitals_as_json(lat : Float64, long : Float64) : HTTP::Client::Response
-      url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"
-      Log.info { "calling client with #{url}" }
+      # url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"
+      url = "/maps/api/place/nearbysearch/json?radius=50000&keyword=hospital&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
+      Log.debug { "calling client with #{url}" }
       resp = http_client.get(url)
       if resp.success?
         resp
@@ -100,9 +99,6 @@ module Gmaps
 
     def extract_hospitals(json_result : String) : Array(Hospital)
       result = PlaceQuery.from_json(json_result)
-      puts "status #{result.status}"
-      puts "next_page_token #{result.next_page_token}"
-
       hospitals = [] of Hospital
       return hospitals unless result.status == "OK"
       places = result.results
@@ -127,7 +123,7 @@ module Gmaps
 
     def generate_directions_response(origin : Gmaps::LatLon, destination : Gmaps::Hospital) : HTTP::Client::Response
       url = "/maps/api/directions/json?origin=#{origin.latitude},#{origin.longitude}&destination=place_id:#{destination.place_id}&key=#{api_key}"
-      Log.info { "getting directions by calling client with #{url}" }
+      Log.debug { "getting directions by calling client with #{url}" }
       resp = http_client.get(url)
     end
 

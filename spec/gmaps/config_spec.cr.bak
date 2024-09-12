@@ -1,0 +1,187 @@
+require "./../spec_helper"
+require "spec"
+require "./../../src/gmaps/config"
+
+# Helper method to create a fake config file with the given content
+def create_fake_config_file(dir, content)
+  fname = File.join(dir, ".config/gmaps/config.json")
+  File.write(fname, content)
+end
+
+def with_temp_dir(d)
+  with_tempfile(d) do |f|
+    Dir.mkdir_p f
+    yield f
+  end
+end
+
+def with_home_dir(dirname)
+  with_temp_dir(dirname) do |d|
+    homedir = File.expand_path d
+    with_env("USERPROFILE": homedir) do
+      yield homedir
+    end
+  end
+end
+
+describe Gmaps::Config do
+  # Helper method to create a temporary directory for testing
+
+  before_each do
+    # Ensure a clean environment for each test
+    ENV["XDG_CONFIG_HOME"] = nil
+    ENV["ENCRYPTION_KEY"] = "test_key" # Use a consistent key for testing
+    config = Gmaps::Config.new
+  end
+
+  describe "with temp dir" do
+    it "works as expected" do
+      saved_path = nil
+      with_temp_dir("home") do |f|
+        saved_path = File.expand_path f
+        Dir.exists?(f).should be_true
+        File.basename(f).should eq("home")
+      end
+      Dir.exists?(saved_path.not_nil!).should be_false
+    end
+  end
+
+  describe "#initialize" do
+    it "sets the default API key to an empty string" do
+      config = Gmaps::Config.new
+      config.api_key.should eq ""
+    end
+
+    it "creates the config directory if it doesn't exist" do
+      with_home_dir("userhome") do |home_dir|
+        config = Gmaps::Config.new
+        Dir.exists?(config.config_dir).should be_true
+        config.config_dir.should eq(Path[home_dir] / ".config/gmaps")
+      end
+    end
+
+    it "sets the config_file_path correctly" do
+      with_home_dir("userhome") do |_|
+        config = Gmaps::Config.new
+        config.config_file_path.should eq File.join(config.config_dir, "config.json")
+      end
+    end
+
+    it "loads the config file if it exists" do
+      with_home_dir("userhome") do |home_dir|
+        create_fake_config_file(home_dir, %({"api_key": "my_api_key"}))
+        config = Gmaps::Config.new
+        data = File.read(config.config_file_path)
+        data.should eq(%({"api_key": "my_api_key"}))
+        config.api_key.should eq "my_api_key"
+      end
+    end
+
+    pending "raises ConfigError if loading the config file fails" do
+      with_temp_dir do
+        create_fake_config_file("invalid json")
+        ->{ Gmaps::Config.new }.should raise(Gmaps::ConfigError)
+      end
+    end
+  end
+
+  describe "#config_file_exists?" do
+    pending "returns true if the config file exists" do
+      with_temp_dir do
+        create_fake_config_file(%({"api_key": "my_api_key"}))
+        config = Gmaps::Config.new
+        config.config_file_exists?.should be_true
+      end
+    end
+
+    pending "returns false if the config file does not exist" do
+      with_temp_dir do
+        config = Config.new
+        config.config_file_exists?.should be_false
+      end
+    end
+  end
+
+  describe "#open_config_file" do
+    # Testing this method thoroughly would require mocking system calls and user interaction,
+    # which is beyond the scope of this example. However, we can test some basic behavior.
+
+    pending "raises ConfigError if decrypting the config file fails" do
+      with_temp_dir do
+        create_fake_config_file("invalid encrypted data")
+        config = Config.new
+        ->{ config.open_config_file }.should raise(Gmaps::ConfigError)
+      end
+    end
+
+    pending "raises ConfigError if encrypting the config file fails" do
+      with_temp_dir do
+        ENV["ENCRYPTION_KEY"] = nil # Simulate missing encryption key
+        config = Config.new
+        ->{ config.open_config_file }.should raise(Gmaps::ConfigError)
+      end
+    end
+  end
+
+  describe "#config_dir" do
+    pending "uses XDG_CONFIG_HOME if set" do
+      ENV["XDG_CONFIG_HOME"] = "/path/to/config"
+      config = Config.new
+      config.config_dir.should eq "/path/to/config/gmaps"
+    end
+
+    pending "uses the default config directory if XDG_CONFIG_HOME is not set" do
+      ENV["HOME"] = "/home/user"
+      config = Config.new
+      config.config_dir.should eq "/home/user/.config/gmaps"
+    end
+  end
+
+  describe "#load_config" do
+    # This method is private, but we can test it indirectly through #initialize
+  end
+
+  describe "#encrypt and #decrypt" do
+    pending "encrypts and decrypts data correctly" do
+      data = "secret data"
+      encrypted_data = @config.encrypt(data)
+      decrypted_data = @config.decrypt(encrypted_data)
+      decrypted_data.should eq data
+    end
+  end
+end
+# require "./../spec_helper"
+
+# require "./../../src/gmaps/config"
+
+# describe Gmaps::Config do
+#   describe "#open_config_file" do
+#     pending "opens the config file using the default editor" do
+#       config = Gmaps::Config.new
+#       config.open_config_file
+#       # Assert the config file was opened
+#     end
+
+#     pending "opens the config file using EDITOR env var if set" do
+#       ENV["EDITOR"] = "nvim"
+#       config = Gmaps::Config.new
+#       config.open_config_file
+#       # Assert vim was used to open the file
+#     end
+#   end
+
+#   describe "#config_dir" do
+#     pending "returns the default config dir" do
+#       config = Gmaps::Config.new
+#       config_dir = config.config_dir
+#       config_dir.should eq File.join(ENV["HOME"], ".config", "gmaps")
+#     end
+
+#     pending "returns XDG_CONFIG_HOME if set" do
+#       ENV["XDG_CONFIG_HOME"] = "/tmp/config"
+#       config = Gmaps::Config.new
+#       config_dir = config.config_dir
+#       config_dir.should eq File.join("/tmp/config", "gmaps")
+#     end
+#   end
+# end

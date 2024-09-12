@@ -9,5 +9,9 @@ module Gmaps
   record LatLon, latitude : Float64, longitude : Float64 do
     include Locatable
     include JSON::Serializable
+
+    # creates a LatLon from a tuple of Float64s
+    def initialize(@latitude, @longitude)
+    end
   end
 end

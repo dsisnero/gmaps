@@ -76,7 +76,6 @@ module Gmaps
     Hybrid
   end
 
-
   class StaticMap
     Log = ::Log.for(self)
     include UrlSigner
@@ -130,7 +129,7 @@ module Gmaps
       end
       url.query = params
 
-      Log.info { "fetching #{url}" }
+      Log.debug { "fetching #{url}" }
 
       HTTP::Client.get(url)
     end

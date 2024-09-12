@@ -23,9 +23,11 @@ module Gmaps
     end
 
     it "allows you to fetch a static map" do
+      load_dotenv
+      api_key = ENV["API_KEY"]
       json = File.read("spec/testdata/direction_result.json")
       result = DirectionResult.from_json(json)
-      map = result.fetch_static_map(api_key: Gmaps.get_api_key)
+      map = result.fetch_static_map(api_key: api_key)
       map.should be_a(String)
       File.write("spec/testdata/direction_result.png", map)
     end

@@ -15,7 +15,7 @@ module Gmaps
     end
 
     def output_driving_directions(name : String, leg : Gmaps::Leg, io : String | IO, heading_level : Int32 = 1)
-      io << "#" * heading_level + " Directions to #{name}\n\n"
+      io << "=" * heading_level + " Directions to #{name}\n\n"
       io << "Starting Address: #{leg.start_address}\n\n"
       io << "Ending Address: #{leg.end_address}\n\n"
       print_steps(io, leg.steps)
@@ -23,18 +23,18 @@ module Gmaps
 
     def output_report(hospital, route, io, heading_level : Int32 = 3)
       name = hospital.name
-      io << "#" * heading_level + " EMERGENCY ACTION PLAN\n\n"
+      io << "=" * heading_level + " EMERGENCY ACTION PLAN\n\n"
       str = <<-EMERGENCY
 In case of emergency, follow any posted emergency procedures and call 911. The nearest
-medical center is approximately 20 minutes away (see Figure 1: Route to Nearest
+medical center is #{route.distance} and approximately #{route.duration} away (see Figure 1: Route to Nearest
 Medical Center).
 EMERGENCY
       io << str
       io << "\n\n"
       hospital.address_to_adoc(io)
       io << "\n\n"
-      io << "Map of Route\n"
-      io << "image::{hospital.directions.image}[Hospital Directions, 240,180]\n\n"
+      io << ".Map of Route\n"
+      io << "image::{hospital_directions_image}[Hospital Directions, 240,180]\n\n"
       if leg = route.legs[0]
         output_driving_directions(name, leg, io, heading_level: heading_level + 1)
       end

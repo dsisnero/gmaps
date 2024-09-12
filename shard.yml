@@ -7,13 +7,23 @@ authors:
 crystal: 1.8.2
 
 targets:
-  nearest_hospitals:
-    main: src/nearest_hospitals.cr
+  gmaps:
+    main: src/gmaps.cr
 
 dependencies:
+  dotenv:
+    github: drum445/dotenv
   totem:
     github: icyleaf/totem
   poncho:
     github: icyleaf/poncho
+  athena-console:
+    github: athena-framework/console
+  athena-spec:
+    github: athena-framework/spec
+  secrets:
+    gitlab: HCLarsen/secrets
+  haversine:
+    github: geocrystal/haversine
 
 license: MIT

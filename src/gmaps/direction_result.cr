@@ -126,6 +126,14 @@ module Gmaps
     def print_route(io : IO | String)
     end
 
+    def duration
+      legs[0].duration.text
+    end
+
+    def distance
+      legs[0].distance.text
+    end
+
     # output a path string for the route to use in google static map api
     def path_string(weight : Int32 = 5, color : String = "blue")
       "weight:#{weight}|color:#{color}|enc:#{overview_polyline.encoded_points}"
