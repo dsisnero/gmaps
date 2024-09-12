@@ -1,0 +1,69 @@
+require "../spec_helper"
+require "./../../src/gmaps/support/file_encryptor"
+
+describe Gmaps::Support::FileEncryptor do
+  # Replace with a valid encryption key for testing
+
+  describe ".write" do
+    it "encrypts and writes data to a file" do
+      encryption_key = "your_encryption_key"
+      test_file = "test_file.txt"
+      test_data = "This is some test data."
+      Gmaps::Support::FileEncryptor.write(test_file, test_data, encryption_key)
+      File.exists?(test_file).should be_true
+      File.read(test_file).should_not eq(test_data) # Should be encrypted
+      File.delete test_file if File.exists? test_file
+    end
+  end
+
+  describe ".read" do
+    it "reads and decrypts data from a file" do
+      encryption_key = "your_encryption_key"
+      test_file = "test_file.txt"
+      test_data = "This is some test data."
+      Gmaps::Support::FileEncryptor.write(test_file, test_data, encryption_key)
+      decrypted_data = Gmaps::Support::FileEncryptor.read(test_file, encryption_key)
+      decrypted_data.should eq(test_data.to_slice)
+      File.delete test_file if File.exists? test_file
+    end
+  end
+
+  describe ".read_as_string" do
+    it "reads and decrypts data from a file as a string" do
+      encryption_key = "your_encryption_key"
+      test_file = "test_file.txt"
+      test_data = "This is some test data."
+      Gmaps::Support::FileEncryptor.write(test_file, test_data, encryption_key)
+      decrypted_data = Gmaps::Support::FileEncryptor.read_as_string(test_file, encryption_key)
+      decrypted_data.should eq(test_data)
+      File.delete test_file if File.exists? test_file
+    end
+  end
+
+  describe ".encryption_key" do
+    context "when GMAPS_ENCRYPTION_KEY is set" do
+      encryption_key = "your_encryption_key"
+      ENV["GMAPS_ENCRYPTION_KEY"] = encryption_key
+      it "returns the value from the environment variable" do
+        puts "env : #{ENV["GMAPS_ENCRYPTION_KEY"]?}"
+        Gmaps::Support::FileEncryptor.encryption_key.should eq(encryption_key)
+      end
+    end
+
+    context "when GMAPS_ENCRYPTION_KEY is not set" do
+      ENV.delete("GMAPS_ENCRYPTION_KEY")
+      file_data = "file encryption key"
+      File.write(Gmaps::Support::FileEncryptor::FILE_PATH, file_data)
+      after_each do
+        File.delete(Gmaps::Support::FileEncryptor::FILE_PATH) if File.exists? Gmaps::Support::FileEncryptor::FILE_PATH
+      end
+      it "reads the key from the default file" do
+        Gmaps::Support::FileEncryptor.encryption_key.should eq(file_data)
+      end
+
+      it "raises an exception if the file is missing" do
+        expect_raises(Gmaps::EncryptionKeyMissing) { Gmaps::Support::FileEncryptor.encryption_key }
+      end
+    end
+  end
+end

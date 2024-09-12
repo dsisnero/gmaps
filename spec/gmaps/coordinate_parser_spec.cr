@@ -1,5 +1,6 @@
-require "spec"
-require "../src/gmaps/coordinate_parser" # Import your CoordinateParser module
+require "../spec_helper"
+puts "SRC #{SRC}"
+require "../../src/gmaps/coordinate_parser"
 
 describe Gmaps::CoordinateParser do
   it "doItAsOsm" do

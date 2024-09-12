@@ -59,7 +59,7 @@ module Gmaps
     end
 
     def parse_lat_lng(latitude : String, longitude : String) : LatLon
-      Log.info { "parsing lat:#{latitude} : lng : #{longitude}" }
+      Log.debug { "parsing lat:#{latitude} : lng : #{longitude}" }
       if latitude.nil? || latitude.empty? || longitude.nil? || longitude.empty?
         raise ParseException.new("nil or empty coordinates lat #{latitude} long #{longitude}")
       end

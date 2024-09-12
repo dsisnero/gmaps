@@ -1,4 +1,4 @@
-require "./../src/gmaps/html_to_asciidoc"
+require "../../src/gmaps/html_to_asciidoc"
 
 describe "HTML to AsciiDoc conversion" do
   describe "#extract_headings" do
