@@ -84,8 +84,16 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
       return process_selected_hospital(hospital, coordinates, options, style, app, output)
     end
 
-    style.error "No hospitals found within 100 miles"
-    ACON::Command::Status::FAILURE
+    # Ask if user wants to search by name
+    helper = ACON::Helper::Question.new
+    question = ACON::Question::Confirmation.new("Would you like to search for a specific hospital or clinic by name?", true)
+    
+    if helper.ask(input, output, question)
+      search_hospitals_by_name(coordinates, options, style, key, input, output)
+    else
+      style.error "No hospitals found within 100 miles"
+      ACON::Command::Status::FAILURE
+    end
   end
 
   private def handle_no_hospitals(style) : ACON::Command::Status
@@ -128,5 +136,31 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
       style.success "Printing file #{filename}"
       File.write(filename, map)
     end
+  end
+
+  private def search_hospitals_by_name(coordinates, options, style, key, input, output) : ACON::Command::Status
+    helper = ACON::Helper::Question.new
+    question = ACON::Question::Text.new("Enter hospital or clinic name to search for:")
+    
+    if search_term = helper.ask(input, output, question)
+      app = Gmaps::App.new(key)
+      hospitals = app.search_hospitals_by_name(search_term, coordinates)
+      
+      if hospitals.empty?
+        style.error "No hospitals found matching '#{search_term}'"
+        return ACON::Command::Status::FAILURE
+      end
+
+      Log.debug { "Found #{hospitals.size} hospitals matching '#{search_term}'" }
+      hospitals.each_with_index do |h, i|
+        Log.debug { "Hospital #{i}: #{h.name} at #{h.latitude},#{h.longitude}" }
+      end
+
+      return handle_no_hospitals(style) unless hospital = app.ask_hospitals(hospitals, input, output)
+      return process_selected_hospital(hospital, coordinates, options, style, app, output)
+    end
+
+    style.error "No search term provided"
+    ACON::Command::Status::FAILURE
   end
 end

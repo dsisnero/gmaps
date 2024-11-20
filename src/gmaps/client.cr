@@ -83,6 +83,21 @@ module Gmaps
       find_nearest_hospitals(location.latitude, location.longitude, radius)
     end
 
+    def search_hospitals_by_name(query : String, lat : Float64, long : Float64) : Array(Hospital)
+      url = "/maps/api/place/textsearch/json?query=#{URI.encode_www_form(query)}&location=#{lat},#{long}&type=hospital|health&key=#{@api_key}"
+      Log.debug { "Calling Google Places Text Search API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
+      resp = http_client.get(url)
+      Log.debug { "API Response status: #{resp.status_code}" }
+      Log.debug { "API Response body: #{resp.body}" }
+      
+      if resp.success?
+        extract_hospitals(resp.body)
+      else
+        Log.error { "Gmap api call unsuccessful returned body: #{resp.body}" }
+        raise "Failed to fetch hospital information using google maps text search api #{resp.body}"
+      end
+    end
+
     # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.56908,-116.92226&radius=5000&types=hospital&key=AIzaSyC4P-wFp5NJkICEG7gD6QpHF6Kf4IKgHko
     def get_nearest_hospitals_as_json(lat : Float64, long : Float64, radius : Float64 = 50000.0) : HTTP::Client::Response
       # url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"

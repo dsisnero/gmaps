@@ -91,6 +91,10 @@ module Gmaps
       client.find_nearest_hospitals(coordinates, radius)
     end
 
+    def search_hospitals_by_name(query : String, coordinates : Gmaps::Locatable) : Array(Hospital)
+      client.search_hospitals_by_name(query, coordinates.latitude, coordinates.longitude)
+    end
+
     def ask_hospitals(hospitals : Array(Gmaps::Hospital), input : ACON::Input::Interface, output : ACON::Output::Interface) : Gmaps::Hospital?
       helper = ACON::Helper::Question.new
       output.puts "Nearest hospitals sorted by distance:"
