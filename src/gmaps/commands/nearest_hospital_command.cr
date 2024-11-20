@@ -19,11 +19,11 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
-    
+
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
     return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style, key)
-    
+
     process_hospital_search(coordinates, options, style, key, input, output)
   end
 
@@ -36,27 +36,27 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     )
   end
 
-  private def parse_coordinates(options : CommandOptions, style, key) : Coordinates?
+  private def parse_coordinates(options : CommandOptions, style, key) : LatLon?
     Log.debug { "parsing coordinates lat: #{options.latitude}, lng: #{options.longitude}" }
-    
+
     app = Gmaps::App.new(key)
     coordinates = app.parse_coordinates(options.latitude, options.longitude)
-    
+
     unless coordinates
       style.error "Invalid coordinates"
       return nil
     end
-    
+
     coordinates
   end
 
   private def process_hospital_search(coordinates, options, style, key, input, output) : ACON::Command::Status
     app = Gmaps::App.new(key)
-    
+
     hospitals = app.get_nearest_hospitals(coordinates)
     return handle_no_hospitals(style) unless hospital = app.ask_hospitals(hospitals, input, output)
-    
-    process_selected_hospital(hospital, coordinates, options, style, app)
+
+    process_selected_hospital(hospital, coordinates, options, style, app, output)
   end
 
   private def handle_no_hospitals(style) : ACON::Command::Status
@@ -64,11 +64,11 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     ACON::Command::Status::FAILURE
   end
 
-  private def process_selected_hospital(hospital, coordinates, options, style, app) : ACON::Command::Status
+  private def process_selected_hospital(hospital, coordinates, options, style, app, output) : ACON::Command::Status
     output.puts "Getting route to hospital: #{hospital.name}"
-    
+
     return handle_no_route(style) unless route = app.get_route(coordinates, hospital)
-    
+
     generate_output_files(hospital, route, options, style, app)
     ACON::Command::Status::SUCCESS
   end
@@ -89,7 +89,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   private def generate_directions_file(filename, hospital, route, style, app)
     style.success "Printing file #{filename}"
-    File.open(filename, "w") do |io| 
+    File.open(filename, "w") do |io|
       app.puts_asciidoc_directions(hospital, route, heading_level: 3, io: io)
     end
   end
