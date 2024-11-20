@@ -1,0 +1,23 @@
+{
+  "html_attributions": [],
+  "results": [
+    {
+      "business_status": "OPERATIONAL",
+      "formatted_address": "462 1st Ave, New York, NY 10016, United States",
+      "geometry": {
+        "location": {
+          "lat": 40.7409351,
+          "lng": -73.9765372
+        }
+      },
+      "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png",
+      "name": "NYC Health + Hospitals/Bellevue",
+      "place_id": "ChIJ1QA2GchZwokRJYX3IHa0-1Y",
+      "rating": 3.7,
+      "reference": "ChIJ1QA2GchZwokRJYX3IHa0-1Y",
+      "types": ["hospital", "health", "point_of_interest", "establishment"],
+      "vicinity": "462 1st Avenue"
+    }
+  ],
+  "status": "OK"
+}
