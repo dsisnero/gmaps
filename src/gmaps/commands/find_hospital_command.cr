@@ -24,6 +24,12 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
 
+    if input.arguments.empty?
+      style.error "Hospital name argument is required"
+      output.puts self.help(input)
+      return ACON::Command::Status::FAILURE
+    end
+
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
     return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style, key)
