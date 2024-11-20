@@ -74,13 +74,13 @@ module Gmaps
       @http_client = HTTP::Client.new("maps.googleapis.com", tls: true, port: 443)
     end
 
-    def find_nearest_hospitals(lat : Float64, long : Float64) : Array(Hospital)
-      response = get_nearest_hospitals_as_json(lat, long)
+    def find_nearest_hospitals(lat : Float64, long : Float64, radius : Float64 = 50000.0) : Array(Hospital)
+      response = get_nearest_hospitals_as_json(lat, long, radius)
       extract_hospitals(response.body)
     end
 
-    def find_nearest_hospitals(location : Gmaps::Locatable)
-      find_nearest_hospitals(location.latitude, location.longitude)
+    def find_nearest_hospitals(location : Gmaps::Locatable, radius : Float64 = 50000.0)
+      find_nearest_hospitals(location.latitude, location.longitude, radius)
     end
 
     # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.56908,-116.92226&radius=5000&types=hospital&key=AIzaSyC4P-wFp5NJkICEG7gD6QpHF6Kf4IKgHko

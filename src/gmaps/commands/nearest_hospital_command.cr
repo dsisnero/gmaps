@@ -7,7 +7,8 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     latitude : String,
     longitude : String,
     directions_filename : String,
-    map_filename : String
+    map_filename : String,
+    retry : Bool
 
   protected def configure : Nil
     self
@@ -15,6 +16,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
       .option("directions_filename", value_mode: :required, description: "Filename for directions")
       .option("map_filename", value_mode: :required, description: "Filename for map")
+      .option("retry", description: "Retry with increased radius if no hospitals found")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
@@ -32,7 +34,8 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
       latitude: input.option("latitude", String),
       longitude: input.option("longitude", String),
       directions_filename: input.option("directions_filename", String),
-      map_filename: input.option("map_filename", String)
+      map_filename: input.option("map_filename", String),
+      retry: input.option("retry", Bool, false)
     )
   end
 
@@ -52,22 +55,35 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   private def process_hospital_search(coordinates, options, style, key, input, output) : ACON::Command::Status
     app = Gmaps::App.new(key)
+    base_radius = 50000.0 # 50km ≈ 31 miles
+    max_radius = 160934.0 # 100 miles in meters
+    current_radius = base_radius
 
-    hospitals = app.get_nearest_hospitals(coordinates)
-    
-    if hospitals.empty?
-      style.error "No hospitals found in the area. Try increasing the search radius."
-      return ACON::Command::Status::FAILURE
+    while current_radius <= max_radius
+      hospitals = app.get_nearest_hospitals(coordinates, radius: current_radius)
+      
+      if hospitals.empty?
+        if options.retry
+          style.warning "No hospitals found within #{(current_radius/1609.34).round(1)} miles. Expanding search..."
+          current_radius += 32186.9 # 20 miles in meters
+          next
+        else
+          style.error "No hospitals found in the area. Try using --retry to expand search radius."
+          return ACON::Command::Status::FAILURE
+        end
+      end
+
+      Log.debug { "Found #{hospitals.size} hospitals within #{(current_radius/1609.34).round(1)} miles" }
+      hospitals.each_with_index do |h, i|
+        Log.debug { "Hospital #{i}: #{h.name} at #{h.latitude},#{h.longitude}" }
+      end
+
+      return handle_no_hospitals(style) unless hospital = app.ask_hospitals(hospitals, input, output)
+      return process_selected_hospital(hospital, coordinates, options, style, app, output)
     end
 
-    Log.debug { "Found #{hospitals.size} hospitals" }
-    hospitals.each_with_index do |h, i|
-      Log.debug { "Hospital #{i}: #{h.name} at #{h.latitude},#{h.longitude}" }
-    end
-
-    return handle_no_hospitals(style) unless hospital = app.ask_hospitals(hospitals, input, output)
-
-    process_selected_hospital(hospital, coordinates, options, style, app, output)
+    style.error "No hospitals found within 100 miles"
+    ACON::Command::Status::FAILURE
   end
 
   private def handle_no_hospitals(style) : ACON::Command::Status
