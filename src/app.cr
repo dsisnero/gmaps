@@ -87,8 +87,8 @@ module Gmaps
       end
     end
 
-    def get_nearest_hospitals(coordinates : Gmaps::Locatable)
-      client.find_nearest_hospitals(coordinates)
+    def get_nearest_hospitals(coordinates : Gmaps::Locatable, radius : Float64 = 50000.0)
+      client.find_nearest_hospitals(coordinates, radius)
     end
 
     def ask_hospitals(hospitals : Array(Gmaps::Hospital), input : ACON::Input::Interface, output : ACON::Output::Interface) : Gmaps::Hospital?
