@@ -3,6 +3,7 @@ require "athena-console"
 require "option_parser"
 require "./gmaps/commands/edit_api_key_command"
 require "./gmaps/commands/nearest_hospital_command"
+require "./gmaps/commands/find_hospital_command"
 
 application = ACON::Application.new "GMaps"
 
