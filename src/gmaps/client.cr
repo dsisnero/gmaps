@@ -84,9 +84,9 @@ module Gmaps
     end
 
     # https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=40.56908,-116.92226&radius=5000&types=hospital&key=AIzaSyC4P-wFp5NJkICEG7gD6QpHF6Kf4IKgHko
-    def get_nearest_hospitals_as_json(lat : Float64, long : Float64) : HTTP::Client::Response
+    def get_nearest_hospitals_as_json(lat : Float64, long : Float64, radius : Float64 = 50000.0) : HTTP::Client::Response
       # url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"
-      url = "/maps/api/place/nearbysearch/json?radius=50000&keyword=hospital&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
+      url = "/maps/api/place/nearbysearch/json?radius=#{radius}&keyword=hospital&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
       Log.debug { "calling client with #{url}" }
       resp = http_client.get(url)
       if resp.success?

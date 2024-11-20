@@ -4,6 +4,7 @@ class Gmaps::EditApiKeyCommand < ACON::Command
     self
       .argument("gmaps_api_key", ACON::Input::Argument::Mode::REQUIRED, "API key")
   end
+
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     # if config_file_exists? and master_keyfile exists
     # load config_file and update api_key
@@ -20,10 +21,8 @@ class Gmaps::EditApiKeyCommand < ACON::Command
   end
 end
 
-
-
-      #   config = Gmaps::Config.from_yaml(config_file_path)
-      #   config.api_key = input.get_argument("api_key").as_s
-      #   config.save
-      # else
-      #   config = Gmaps::Config.new
+#   config = Gmaps::Config.from_yaml(config_file_path)
+#   config.api_key = input.get_argument("api_key").as_s
+#   config.save
+# else
+#   config = Gmaps::Config.new

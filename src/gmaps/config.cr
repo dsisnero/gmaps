@@ -26,7 +26,6 @@ module Gmaps
       Config.from_yaml(loader.to_yaml)
     end
 
-
     def initialize(@gmaps_api_key : String)
     end
   end
@@ -60,7 +59,6 @@ module Gmaps
 
       # Create config file if it doesn't exist
       Secrets.generate(config_file.to_s, keyfile.to_s) unless File.exists?(config_file)
-
     end
 
     # Edits the API key stored in the config file
@@ -90,7 +88,7 @@ module Gmaps
       end
     end
 
-# Retrieves the API key from the config file, returning nil if not found
+    # Retrieves the API key from the config file, returning nil if not found
     #
     # Returns:
     # + (String | Nil) - The API key or nil if not found
@@ -101,7 +99,6 @@ module Gmaps
       else
         nil
       end
-
     end
 
     def to_yaml

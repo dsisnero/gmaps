@@ -13,7 +13,6 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
     tester.display.should contain "API key updated"
   end
 
-
   private def command : GMaps::EditApiKeyCommand
     GMaps::EditApiKeyCommand.new
   end
@@ -21,6 +20,4 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
   private def command_tester : ACON::Spec::CommandTester
     ACON::Spec::CommandTester.new self.command
   end
-
-
 end

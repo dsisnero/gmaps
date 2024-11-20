@@ -10,8 +10,8 @@ require "dotenv"
 require "path"
 
 TEST_ROOT = Path[__DIR__].expand
-ROOT = TEST_ROOT.parent
-SRC = ROOT / "src"
+ROOT      = TEST_ROOT.parent
+SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 

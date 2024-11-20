@@ -3,10 +3,10 @@ require "athena-console"
 class Gmaps::NearestHospitalsCommand < ACON::Command
   protected def configure : Nil
     self
-      .option("latitude",  value_mode: :required, description: "Latitude coordinate")
-      .option("longitude",  value_mode: :required,  description: "Longitude coordinate")
-      .option("directions_filename",  value_mode: :required,  description: "Filename for directions")
-      .option("map_filename",  value_mode: :required,  description: "Filename for map")
+      .option("latitude", value_mode: :required, description: "Latitude coordinate")
+      .option("longitude", value_mode: :required, description: "Longitude coordinate")
+      .option("directions_filename", value_mode: :required, description: "Filename for directions")
+      .option("map_filename", value_mode: :required, description: "Filename for map")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
@@ -37,18 +37,18 @@ class Gmaps::NearestHospitalsCommand < ACON::Command
           style.success "Printing file #{direction_filename.not_nil!}"
           File.open(direction_filename.not_nil!, "w") { |io| app.puts_asciidoc_directions(hospital, route, heading_level: 3, io: io) }
           if map = app.fetch_static_map(hospital, route)
-             # map_filename = input.option("map_filename", String) || "#{name}.png"
-             style.success "Printing file #{map_filename}"
-             File.write(map_filename, map)
+            # map_filename = input.option("map_filename", String) || "#{name}.png"
+            style.success "Printing file #{map_filename}"
+            File.write(map_filename, map)
           end
           ACON::Command::Status::SUCCESS
         else
           style.error "No route found"
-          return ACON::Command::Status::FAILURE
+          ACON::Command::Status::FAILURE
         end
       else
         style.error "No hospital found"
-        return ACON::Command::Status::FAILURE
+        ACON::Command::Status::FAILURE
       end
     else
       style.error "Invalid coordinates"

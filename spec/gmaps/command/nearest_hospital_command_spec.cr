@@ -1,7 +1,6 @@
 require "../../spec_helper"
 
 struct NearestHospitalsCommandTest < ASPEC::TestCase
-
   def test_given_no_lat_and_lng : Nil
     tester = self.command_tester
     ret = tester.execute
@@ -24,8 +23,6 @@ struct NearestHospitalsCommandTest < ASPEC::TestCase
     puts tester.display
   end
 
-
-
   private def command : GMaps::NearestHospitalsCommand
     GMaps::NearestHospitalsCommand.new
   end
@@ -33,7 +30,4 @@ struct NearestHospitalsCommandTest < ASPEC::TestCase
   private def command_tester : ACON::Spec::CommandTester
     ACON::Spec::CommandTester.new self.command
   end
-
 end
-
-
