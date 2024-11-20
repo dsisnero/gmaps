@@ -84,17 +84,22 @@ module Gmaps
     end
 
     def search_hospitals_by_name(query : String, lat : Float64, long : Float64) : Array(Hospital)
-      url = "/maps/api/place/textsearch/json?query=#{URI.encode_www_form(query)}&location=#{lat},#{long}&type=hospital|health&key=#{@api_key}"
+      url = "/maps/api/place/textsearch/json?query=#{URI.encode_www_form(query)}&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
+      Log.info { "Searching for hospitals matching: #{query}" }
       Log.debug { "Calling Google Places Text Search API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
+      
       resp = http_client.get(url)
       Log.debug { "API Response status: #{resp.status_code}" }
       Log.debug { "API Response body: #{resp.body}" }
       
       if resp.success?
-        extract_hospitals(resp.body)
+        hospitals = extract_hospitals(resp.body)
+        Log.info { "Found #{hospitals.size} hospitals matching '#{query}'" }
+        hospitals
       else
-        Log.error { "Gmap api call unsuccessful returned body: #{resp.body}" }
-        raise "Failed to fetch hospital information using google maps text search api #{resp.body}"
+        Log.error { "Google Places API call failed with status #{resp.status_code}" }
+        Log.error { "Response body: #{resp.body}" }
+        raise "Failed to fetch hospital information using Google Places API: #{resp.body}"
       end
     end
 
