@@ -87,8 +87,10 @@ module Gmaps
     def get_nearest_hospitals_as_json(lat : Float64, long : Float64, radius : Float64 = 50000.0) : HTTP::Client::Response
       # url = "/maps/api/place/nearbysearch/json?location=#{lat},#{long}&rankby=distance&type=hospital&key=#{@api_key}"
       url = "/maps/api/place/nearbysearch/json?radius=#{radius}&keyword=hospital&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
-      Log.debug { "calling client with #{url}" }
+      Log.debug { "Calling Google Places API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
       resp = http_client.get(url)
+      Log.debug { "API Response status: #{resp.status_code}" }
+      Log.debug { "API Response body: #{resp.body}" }
       if resp.success?
         resp
       else

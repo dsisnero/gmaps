@@ -54,6 +54,17 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     app = Gmaps::App.new(key)
 
     hospitals = app.get_nearest_hospitals(coordinates)
+    
+    if hospitals.empty?
+      style.error "No hospitals found in the area. Try increasing the search radius."
+      return ACON::Command::Status::FAILURE
+    end
+
+    Log.debug { "Found #{hospitals.size} hospitals" }
+    hospitals.each_with_index do |h, i|
+      Log.debug { "Hospital #{i}: #{h.name} at #{h.latitude},#{h.longitude}" }
+    end
+
     return handle_no_hospitals(style) unless hospital = app.ask_hospitals(hospitals, input, output)
 
     process_selected_hospital(hospital, coordinates, options, style, app, output)
