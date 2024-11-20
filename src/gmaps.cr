@@ -9,6 +9,7 @@ application = ACON::Application.new "GMaps"
 application.add Gmaps::NearestHospitalsCommand.new
 
 application.add Gmaps::EditApiKeyCommand.new
+application.add Gmaps::FindHospitalCommand.new
 
 application.run
 # require "log"
