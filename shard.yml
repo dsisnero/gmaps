@@ -27,8 +27,7 @@ dependencies:
     github: geocrystal/haversine
 
 development_dependencies:
-  webmock:
-    github: manastech/webmock.cr
-    branch: master
+  vcr:
+    github: spoved/vcr.cr
 
 license: MIT

@@ -4,10 +4,9 @@ require "spec"
 require "athena-spec"
 require "athena-console"
 require "athena-console/spec"
-require "webmock"
+require "vcr"
 require "../src/gmaps"
 require "dotenv"
-# require "../src/nearest_hospitals"
 require "path"
 
 TEST_ROOT = Path[__DIR__].expand
@@ -16,7 +15,13 @@ SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 
-Spec.before_each &->WebMock.reset
+VCR.configure do |config|
+  config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data("<API_KEY>") do |interaction|
+    ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+  end
+end
 
 def load_dotenv
   Dotenv.load
