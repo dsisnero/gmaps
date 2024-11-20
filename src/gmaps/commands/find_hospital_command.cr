@@ -12,7 +12,7 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
 
   protected def configure : Nil
     self
-      .argument("name", description: "Hospital name to search for", required: true)
+      .argument("name", mode: :required, description: "Hospital name to search for")
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
       .option("directions_filename", value_mode: :required, description: "Filename for directions")
