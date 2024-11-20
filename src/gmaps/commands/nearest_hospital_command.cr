@@ -30,12 +30,14 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
   end
 
   private def parse_options(input) : CommandOptions
+    retry_option = input.option("retry") ? true : false
+    
     CommandOptions.new(
       latitude: input.option("latitude", String),
       longitude: input.option("longitude", String),
       directions_filename: input.option("directions_filename", String),
       map_filename: input.option("map_filename", String),
-      retry: input.option("retry", Bool, false)
+      retry: retry_option
     )
   end
 
