@@ -140,7 +140,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   private def search_hospitals_by_name(coordinates, options, style, key, input, output) : ACON::Command::Status
     helper = ACON::Helper::Question.new
-    question = ACON::Question::Text.new("Enter hospital or clinic name to search for:")
+    question = ACON::Question(String?).new("Enter hospital or clinic name to search for:", nil)
     
     if search_term = helper.ask(input, output, question)
       app = Gmaps::App.new(key)
