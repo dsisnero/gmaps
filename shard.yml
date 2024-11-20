@@ -26,4 +26,8 @@ dependencies:
   haversine:
     github: geocrystal/haversine
 
+development_dependencies:
+  webmock:
+    github: manastech/webmock.cr
+
 license: MIT
