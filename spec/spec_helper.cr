@@ -4,6 +4,7 @@ require "spec"
 require "athena-spec"
 require "athena-console"
 require "athena-console/spec"
+require "webmock"
 require "../src/gmaps"
 require "dotenv"
 # require "../src/nearest_hospitals"
@@ -14,6 +15,8 @@ ROOT      = TEST_ROOT.parent
 SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
+
+Spec.before_each &->WebMock.reset
 
 def load_dotenv
   Dotenv.load
