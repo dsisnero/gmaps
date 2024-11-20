@@ -8,6 +8,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     longitude : String,
     directions_filename : String,
     map_filename : String
+
   protected def configure : Nil
     self
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
@@ -25,7 +26,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     
     process_hospital_search(coordinates, options, style, key, input, output)
   end
-end
+
   private def parse_options(input) : CommandOptions
     CommandOptions.new(
       latitude: input.option("latitude", String),
@@ -99,3 +100,4 @@ end
       File.write(filename, map)
     end
   end
+end
