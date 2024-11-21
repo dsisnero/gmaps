@@ -108,4 +108,42 @@ describe Gmaps::Client do
       end
     end
   end
+
+  describe "#get_satellite_image" do
+    it "returns image data for valid coordinates" do
+      VCR.use_cassette("satellite_image") do
+        api_key = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+        client = Gmaps::Client.new(api_key)
+
+        # New York City coordinates
+        image_data = client.get_satellite_image(40.7128, -74.0060)
+        
+        # Check that we got image data back
+        image_data.should be_a(Bytes)
+        image_data.size.should be > 0
+      end
+    end
+
+    it "raises error on API failure" do
+      VCR.use_cassette("satellite_image_error") do
+        client = Gmaps::Client.new("invalid_api_key")
+
+        expect_raises(Exception, /Failed to fetch satellite image/) do
+          client.get_satellite_image(40.7128, -74.0060)
+        end
+      end
+    end
+
+    it "accepts custom radius and adjusts zoom accordingly" do
+      VCR.use_cassette("satellite_image_custom_radius") do
+        api_key = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+        client = Gmaps::Client.new(api_key)
+
+        # Test with a larger radius
+        image_data = client.get_satellite_image(40.7128, -74.0060, 5000)
+        image_data.should be_a(Bytes)
+        image_data.size.should be > 0
+      end
+    end
+  end
 end

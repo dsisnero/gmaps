@@ -181,5 +181,47 @@ module Gmaps
       Log.error { ex.message }
       raise ex
     end
+
+    # Gets a satellite image for the specified location and radius
+    def get_satellite_image(latitude : Float64, longitude : Float64, radius : Int32 = 1000, zoom : Int32 = 15) : Bytes
+      # Calculate appropriate zoom level based on radius if not specified
+      zoom = calculate_zoom_level(radius) unless zoom
+
+      params = HTTP::Params.build do |form|
+        form.add "center", "#{latitude},#{longitude}"
+        form.add "zoom", zoom.to_s
+        form.add "size", "600x600"
+        form.add "maptype", "satellite"
+        form.add "key", @api_key
+      end
+
+      url = "/maps/api/staticmap?#{params}"
+      Log.debug { "Fetching satellite image with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
+      
+      resp = http_client.get(url)
+      
+      if resp.success?
+        Log.debug { "Successfully retrieved satellite image" }
+        resp.body_io.gets_to_end.to_slice
+      else
+        Log.error { "Failed to fetch satellite image: #{resp.status_code}" }
+        raise "Failed to fetch satellite image: #{resp.status_code} - #{resp.body}"
+      end
+    end
+
+    # Helper method to calculate appropriate zoom level based on radius
+    private def calculate_zoom_level(radius : Int32) : Int32
+      # Rough approximation: 
+      # zoom = 14 shows about 3km
+      # Each zoom level change doubles/halves the visible area
+      base_zoom = 14
+      base_radius = 3000
+      
+      zoom_adjustment = Math.log2(base_radius.to_f / radius)
+      calculated_zoom = (base_zoom + zoom_adjustment).round.to_i
+      
+      # Clamp zoom level between 1 and 20 (Google Maps limits)
+      calculated_zoom.clamp(1, 20)
+    end
   end
 end
