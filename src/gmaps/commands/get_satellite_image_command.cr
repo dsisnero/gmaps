@@ -55,33 +55,27 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
     end
   end
 
-  private def parse_options(input, output) : CommandOptions
-    style = create_style(input, output)
+  private def parse_options(input : ACON::Input::Interface) : CommandOptions
     input.validate
 
     output_file = input.option("output_file", String)
     if output_file.empty?
-      style.error "Output file is required"
-      output.puts self.help
-      return ACON::Command::Status::FAILURE
+      raise ACON::Exception::InvalidArgument.new("Output file is required")
     end
+
     latitude = input.option("latitude", String)
     if latitude.empty?
-      style.error "Latitude is required"
-      output.puts self.help
-      return ACON::Command::Status::FAILURE
+      raise ACON::Exception::InvalidArgument.new("Latitude is required")
     end
+
     longitude = input.option("longitude", String)
     if longitude.empty?
-      style.error "Longitude is required"
-      output.puts self.help
-      return ACON::Command::Status::FAILURE
+      raise ACON::Exception::InvalidArgument.new("Longitude is required")
     end
 
-
     CommandOptions.new(
-      latitude: input.option("latitude", String),
-      longitude: input.option("longitude", String),
+      latitude: latitude,
+      longitude: longitude,
       output_file: output_file,
       zoom: input.option("zoom", Int32)
     )
