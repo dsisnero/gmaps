@@ -1,0 +1,20 @@
+HTTP/1.1 403 Forbidden
+Content-Type: text/plain; charset=UTF-8
+X-Content-Type-Options: nosniff
+Date: Thu, 21 Nov 2024 17:38:01 GMT
+Pragma: no-cache
+Expires: Fri, 01 Jan 1990 00:00:00 GMT
+Cache-Control: no-cache, must-revalidate
+Vary: Accept-Language
+Access-Control-Allow-Origin: *
+Content-Security-Policy-Report-Only: script-src 'none'; form-action 'none'; frame-src 'none'; report-uri https://csp.withgoogle.com/csp/scaffolding/msaispmnec:830:0
+Cross-Origin-Opener-Policy-Report-Only: same-origin; report-to=coop_reporting
+Report-To: {"group":"coop_reporting","max_age":2592000,"endpoints":[{"url":"https://csp.withgoogle.com/csp/report-to/scaffolding/msaispmnec:830:0"}],}
+Server: scaffolding on HTTPServer2
+Content-Length: 88
+X-XSS-Protection: 0
+X-Frame-Options: SAMEORIGIN
+Server-Timing: gfet4t7; dur=24
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+
+The Google Maps Platform server rejected your request. The provided API key is invalid. 

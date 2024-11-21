@@ -1,0 +1,7 @@
+@echo off
+
+
+cd /d %~dp0..
+REM watchexec --filter '*.cr' -r -w src -- .\dev\build-exec.cmd %*
+cd
+watchexec -r -e cr  -- .\dev\build-exec.cmd %*

@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableDelayedExpansion
 
 rem Get the directory of the batch file
 set "SCRIPT_DIR=%~dp0"
@@ -21,7 +22,7 @@ if defined SPEC_FLAG (
 )
 
 rem Run the specified command with the remaining arguments
-watchexec -r -e cr -- "%SCRIPT_DIR%%COMMAND%" %ARGS%
+watchexec -r -e cr -- "%SCRIPT_DIR%%COMMAND%" !ARGS!
 rem 
 rem 
 rem @echo off
