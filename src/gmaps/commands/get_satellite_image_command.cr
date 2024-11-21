@@ -14,14 +14,14 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
       .option("zoom", value_mode: :optional, description: "Zoom level (1-20, default: 19)", default: "19")
-      .option("output", value_mode: :required, description: "Output filename for the satellite image")
+      .option("output_file", value_mode: :required, description: "Output filename for the satellite image")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
 
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
-    return ACON::Command::Status::FAILURE unless options = parse_options(input)
+    return ACON::Command::Status::FAILURE unless options = parse_options(input, output)
     begin
       parsed_coordinates = parse_coordinates(options, style)
     rescue ex : ParseException
@@ -55,13 +55,29 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
     end
   end
 
-  private def parse_options(input) : CommandOptions
+  private def parse_options(input, output) : CommandOptions
+    style = create_style(input, output)
     input.validate
 
-    output_file = input.option("output", String)
+    output_file = input.option("output_file", String)
     if output_file.empty?
-      raise ACON::Exception::Logic.new("Output file is required")
+      style.error "Output file is required"
+      output.puts self.help
+      return ACON::Command::Status::FAILURE
     end
+    latitude = input.option("latitude", String)
+    if latitude.empty?
+      style.error "Latitude is required"
+      output.puts self.help
+      return ACON::Command::Status::FAILURE
+    end
+    longitude = input.option("longitude", String)
+    if longitude.empty?
+      style.error "Longitude is required"
+      output.puts self.help
+      return ACON::Command::Status::FAILURE
+    end
+
 
     CommandOptions.new(
       latitude: input.option("latitude", String),
