@@ -6,14 +6,14 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
   private record CommandOptions,
     latitude : String,
     longitude : String,
-    radius : Int32,
+    zoom : Int32,
     output_file : String
 
   protected def configure : Nil
     self
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
-      .option("radius", value_mode: :optional, description: "Radius in meters (default: 1000)", default: "1000")
+      .option("zoom", value_mode: :optional, description: "Zoom level (1-20, default: 19)", default: "19")
       .option("output", value_mode: :required, description: "Output filename for the satellite image")
   end
 
@@ -31,16 +31,23 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
 
     coordinates = parsed_coordinates.not_nil!
 
+    # Validate zoom level
+    zoom = options.zoom
+    unless (1..20).includes?(zoom)
+      style.error "Zoom level must be between 1 and 20"
+      return ACON::Command::Status::FAILURE
+    end
+
     begin
       client = Gmaps::Client.new(key)
       image_data = client.get_satellite_image(
         coordinates.latitude,
         coordinates.longitude,
-        options.radius
+        zoom: zoom
       )
 
       File.write(options.output_file, image_data)
-      style.success "Satellite image saved to #{options.output_file}"
+      style.success "Satellite image saved to #{options.output_file} (zoom level: #{zoom})"
       ACON::Command::Status::SUCCESS
     rescue ex
       style.error "Failed to get satellite image: #{ex.message}"
@@ -55,7 +62,7 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
       latitude: input.option("latitude", String),
       longitude: input.option("longitude", String),
       output_file: input.option("output", String),
-      radius: input.option("radius", Int32)
+      zoom: input.option("zoom", Int32)
     )
   end
 end
