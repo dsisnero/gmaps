@@ -34,6 +34,18 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
     File.size(tempfile.path).should be > 0
   end
 
+  def test_fails_when_no_output_file_specified
+    tester = self.command_tester
+    
+    ret = tester.execute({
+      "--latitude" => "40.7128",
+      "--longitude" => "-74.0060"
+    })
+
+    ret.should eq ACON::Command::Status::FAILURE
+    tester.display.should contain "Output file is required"
+  end
+
   # def test_given_no_api_key
   #   tester = self.command_tester
   #
