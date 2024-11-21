@@ -202,7 +202,7 @@ module Gmaps
       
       if resp.success?
         Log.debug { "Successfully retrieved satellite image" }
-        resp.body_io.gets_to_end.to_slice
+        resp.body.to_slice
       else
         Log.error { "Failed to fetch satellite image: #{resp.status_code}" }
         raise "Failed to fetch satellite image: #{resp.status_code} - #{resp.body}"
