@@ -3,6 +3,7 @@ require "http/client"
 require "./location_result"
 require "./direction_result"
 require "json"
+require "http/params"
 
 module Gmaps
   module GeoFuncs
@@ -17,8 +18,8 @@ module Gmaps
       dlong = to_radians(long2 - long1)
 
       a = Math.sin(dlat / 2.0) * Math.sin(dlat / 2.0) +
-          Math.cos(to_radians(lat1)) * Math.cos(to_radians(lat2)) *
-          Math.sin(dlong / 2.0) * Math.sin(dlong / 2.0)
+        Math.cos(to_radians(lat1)) * Math.cos(to_radians(lat2)) *
+        Math.sin(dlong / 2.0) * Math.sin(dlong / 2.0)
 
       c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a))
       distance = radius * c
@@ -32,12 +33,12 @@ module Gmaps
     getter place_id : String
     getter latitude : Float64
     getter longitude : Float64
-    getter address : String
+    getter address : String?
     getter distance : Float64
     getter rating : Float64?
     getter extra = Hash(String, JSON::Any).new
 
-    def initialize(@name : String, @place_id, @latitude : Float64, @longitude : Float64, @address : String, @distance : Float64 = 0.0, @rating = nil)
+    def initialize(@name : String, @place_id, @latitude : Float64, @longitude : Float64, @address : String?, @distance : Float64 = 0.0, @rating = nil)
     end
 
     def address_lines
@@ -84,8 +85,17 @@ module Gmaps
     end
 
     def search_hospitals_by_name(query : String, lat : Float64, long : Float64, radius : Float64 = 50000.0) : Array(Hospital)
-      fields = "name,formatted_address,rating,geometry"
-      url = "/maps/api/place/findplacefromtext/json?input=#{URI.encode_www_form(query)}&inputtype=textquery&location=#{lat},#{long}&type=hospital&radius=#{radius}&fields=#{fields}&key=#{@api_key}"
+      params = HTTP::Params.build do |form|
+        form.add("input", query)
+        form.add("inputtype", "textquery")
+        form.add("location", "#{lat},#{long}")
+        form.add("type", "hospital")
+        form.add("radius", radius.to_s)
+        form.add("fields", "name,formatted_address,rating,geometry,place_id")
+        form.add("key", @api_key)
+      end
+
+      url = "/maps/api/place/findplacefromtext/json?#{params}"
       Log.info { "Searching for hospitals matching: #{query}" }
       Log.debug { "Calling Google Places Text Search API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
 
@@ -95,7 +105,7 @@ module Gmaps
 
       if resp.success?
         result = PlaceQueryName.from_json(resp.body)
-        hospitals = extract_hospitals(resp.body)
+        hospitals = extract_hospitals(resp.body, PlaceQueryName)
         Log.info { "Found #{hospitals.size} hospitals matching '#{query}'" }
         hospitals
       else
@@ -121,34 +131,35 @@ module Gmaps
       end
     end
 
-    def extract_hospitals(json_result : String) : Array(Hospital)
-      result = PlaceQueryName.from_json(json_result)
-      places = result.candidates
+    def extract_hospitals(json_result : String, extractor = PlaceQuery) : Array(Hospital)
+      result = extractor.from_json(json_result)
+      Log.debug { "Extracted #{result} places from json\n#{json_result}" }
+      places = case extractor
+               when PlaceQuery.class
+                 result.as(PlaceQuery).results
+               when PlaceQueryName.class
+                 result.as(PlaceQueryName).candidates
+               else
+                 Log.error { "Unknown extractor type: #{extractor} #{extractor.class} #{extractor.=== PlaceQueryName}" }
+                 [] of Place
+               end
       hospitals = [] of Hospital
       if result.status == "OK"
+        Log.debug { "Extracted #{places.size} places from results #{places}" }
         places.each do |place|
+          Log.debug { "Processing place: #{place.name}" }
           loc = place.location
-          if address = place.formatted_address || place.vicinity
-            hospitals << Hospital.new(name: place.name, place_id: place.place_id,
-              latitude: loc.latitude, longitude: loc.longitude, address: address, rating: place.rating)
-          else
-            Log.error { "No address found for #{place.name}" }
-          end
+          address = place.formatted_address || place.vicinity
+          hospitals << Hospital.new(name: place.name, place_id: place.place_id,
+                                    latitude: loc.latitude, longitude: loc.longitude, address: address, rating: place.rating)
         end
+      elsif result.status == "ZERO_RESULTS"
+        Log.info { "No hospitals found within 100 miles" }
+        return hospitals
       else
         Log.error { "Google Places API call failed with status #{result.status}" }
         raise "Failed to fetch hospital information using Google Places API: #{result.status}: #{result.error_message}"
       end
-
-      # results.each do |result|
-      #   name = result["name"].as(String)
-      #   lat = result["geometry"]["location"]["lat"].as(Float64)
-      #   long = result["geometry"]["location"]["long"].as(Float64)
-      #   address = result["vicinity"].as(String)
-      #   distance = calculate_distance(lat, long, original_lat, original_long) # Implement this method
-      #   hospital = Hospital.new(name, lat, long, address, distance)
-      #   hospitals << hospital
-      # end
 
       hospitals
     end
