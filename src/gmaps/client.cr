@@ -122,10 +122,10 @@ module Gmaps
     def extract_hospitals(json_result : String, extractor = PlaceQuery) : Array(Hospital)
       result = extractor.from_json(json_result)
       places = case extractor
-      when PlaceQuery.class
-        result.results
-      when PlaceQueryName.class
-        result.candidates
+      when PlaceQuery
+        result.as(PlaceQuery).results
+      when PlaceQueryName
+        result.as(PlaceQueryName).candidates
       else
         [] of Place
       end
