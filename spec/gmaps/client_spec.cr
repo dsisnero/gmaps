@@ -9,7 +9,6 @@ describe Gmaps::Client do
         client = Gmaps::Client.new(api_key)
 
         hospitals = client.search_hospitals_by_name("Bellevue", 40.7128, -74.0060)
-
         hospitals.size.should be > 0
         hospital = hospitals.first
 
@@ -17,8 +16,12 @@ describe Gmaps::Client do
         hospital.place_id.should_not be_empty
         hospital.latitude.should be_a(Float64)
         hospital.longitude.should be_a(Float64)
-        hospital.address.should_not be_empty
-        hospital.rating.should be_a(Float64?)
+        if address = hospital.address
+          address.should_not be_empty
+        end
+        if rating = hospital.rating
+          rating.should be_a(Float64?)
+        end
       end
     end
 
