@@ -17,7 +17,9 @@ require "./support/**"
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+  config.filter_sensitive_data("<API_KEY>") do |interaction|
+    ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+  end
 end
 
 def load_dotenv
