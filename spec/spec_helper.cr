@@ -6,6 +6,7 @@ require "athena-console"
 require "athena-console/spec"
 require "vcr"
 require "../src/gmaps/client"
+require "../src/gmaps/config"
 require "dotenv"
 require "path"
 
