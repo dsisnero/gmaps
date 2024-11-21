@@ -84,7 +84,8 @@ module Gmaps
     end
 
     def search_hospitals_by_name(query : String, lat : Float64, long : Float64, radius : Float64 = 50000.0) : Array(Hospital)
-      url = "/maps/api/place/findplacefromtext/json?input=#{URI.encode_www_form(query)}&inputtype=textquery&location=#{lat},#{long}&type=hospital&radius=#{radius}&key=#{@api_key}"
+      fields = "name,formatted_address,rating,geometry"
+      url = "/maps/api/place/findplacefromtext/json?input=#{URI.encode_www_form(query)}&inputtype=textquery&location=#{lat},#{long}&type=hospital&radius=#{radius}&fields=#{fields}&key=#{@api_key}"
       Log.info { "Searching for hospitals matching: #{query}" }
       Log.debug { "Calling Google Places Text Search API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
 
@@ -93,7 +94,8 @@ module Gmaps
       Log.debug { "API Response body: #{resp.body}" }
 
       if resp.success?
-        hospitals = extract_hospitals(resp.body, PlaceQueryName)
+        result = PlaceQueryName.from_json(resp.body)
+        hospitals = extract_hospitals(resp.body)
         Log.info { "Found #{hospitals.size} hospitals matching '#{query}'" }
         hospitals
       else
@@ -119,16 +121,9 @@ module Gmaps
       end
     end
 
-    def extract_hospitals(json_result : String, extractor = PlaceQuery) : Array(Hospital)
-      result = extractor.from_json(json_result)
-      places = case extractor
-      when PlaceQuery
-        result.as(PlaceQuery).results
-      when PlaceQueryName
-        result.as(PlaceQueryName).candidates
-      else
-        [] of Place
-      end
+    def extract_hospitals(json_result : String) : Array(Hospital)
+      result = PlaceQueryName.from_json(json_result)
+      places = result.candidates
       hospitals = [] of Hospital
       if result.status == "OK"
         places.each do |place|
