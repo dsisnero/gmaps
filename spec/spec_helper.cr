@@ -5,7 +5,7 @@ require "athena-spec"
 require "athena-console"
 require "athena-console/spec"
 require "vcr"
-require "../src/gmaps"
+require "../src/gmaps/client"
 require "dotenv"
 require "path"
 
@@ -17,9 +17,7 @@ require "./support/**"
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data("<API_KEY>") do |interaction|
-    ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
-  end
+  config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
 end
 
 def load_dotenv
