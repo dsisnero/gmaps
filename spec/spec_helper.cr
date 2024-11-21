@@ -15,9 +15,9 @@ SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 
-VCR.configure do
-  @cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  filter_sensitive_data("<API_KEY>") do |interaction|
+VCR.configure do |config|
+  config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
+  config.filter_sensitive_data("<API_KEY>") do |interaction|
     ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
   end
 end
