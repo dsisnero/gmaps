@@ -26,7 +26,7 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
 
     if input.arguments.empty?
       style.error "Hospital name argument is required"
-      output.puts self.help(input)
+      output.puts self.help
       return ACON::Command::Status::FAILURE
     end
 
