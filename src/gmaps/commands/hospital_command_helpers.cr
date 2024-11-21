@@ -1,3 +1,5 @@
+require "../coordinate_parser"
+
 module Gmaps
   module HospitalCommandHelpers
     private def handle_no_hospitals(style) : ACON::Command::Status
@@ -42,18 +44,9 @@ module Gmaps
       end
     end
 
-    private def parse_coordinates(options, style, key) : LatLon?
-      Log.debug { "parsing coordinates lat: #{options.latitude}, lng: #{options.longitude}" }
-
-      app = Gmaps::App.new(key)
-      coordinates = app.parse_coordinates(options.latitude, options.longitude)
-
-      unless coordinates
-        style.error "Invalid coordinates"
-        return nil
-      end
-
-      coordinates
+    private def parse_coordinates(options, style) : LatLon?
+      Log.debug { "parsing coordinates for #{options}\nlat: #{options.latitude}, lng: #{options.longitude}" }
+      coordinates = Gmaps::CoordinateParser.parse_lat_lng(options.latitude, options.longitude)
     end
   end
 end

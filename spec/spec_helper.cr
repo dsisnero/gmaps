@@ -24,3 +24,5 @@ end
 def load_dotenv
   Dotenv.load
 end
+
+ASPEC.run_all

@@ -32,7 +32,7 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
 
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
-    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style, key)
+    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style)
 
     process_hospital_search(options.name, coordinates, options, style, key, input, output)
   end

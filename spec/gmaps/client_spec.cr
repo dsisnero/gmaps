@@ -56,7 +56,7 @@ describe Gmaps::Client do
         # Using coordinates for New York City
         hospitals = client.find_nearest_hospitals(40.7128, -74.0060)
         hospitals.size.should be > 0
-        
+
         hospital = hospitals.first
         hospital.name.should_not be_empty
         hospital.place_id.should_not be_empty
@@ -99,10 +99,10 @@ describe Gmaps::Client do
 
         # Create a mock Locatable object
         location = Gmaps::LatLon.new(40.7128, -74.0060)
-        
+
         hospitals = client.find_nearest_hospitals(location)
         hospitals.size.should be > 0
-        
+
         hospital = hospitals.first
         hospital.name.should_not be_empty
       end
@@ -117,7 +117,7 @@ describe Gmaps::Client do
 
         # New York City coordinates
         image_data = client.get_satellite_image(40.7128, -74.0060)
-        
+
         # Check that we got image data back
         image_data.should be_a(Bytes)
         image_data.size.should be > 0

@@ -1,10 +1,9 @@
 require "athena-console"
 require "./base_command"
-require "./hospital_command_helpers"
+require "../app"
 
 @[ACONA::AsCommand("nearest_hospital", description: "Get nearest hospital")]
 class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
-  include Gmaps::HospitalCommandHelpers
   private record CommandOptions,
     latitude : String,
     longitude : String,
@@ -23,17 +22,24 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
+    input.validate
 
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
-    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style, key)
-
+    if options.latitude.empty? || options.longitude.empty?
+      output.puts self.help
+      ACON::Command::Status::FAILURE
+    end
+    coordinates = parse_coordinates(options, style)
     process_hospital_search(coordinates, options, style, key, input, output)
+  rescue ex : ParseException
+    style.not_nil!.error "Failed to parse coordinates: #{ex.message}"
+    ACON::Command::Status::FAILURE
   end
 
   private def parse_options(input) : CommandOptions
     retry_option = input.option("retry") ? true : false
-    
+
     CommandOptions.new(
       latitude: input.option("latitude", String),
       longitude: input.option("longitude", String),
@@ -51,7 +57,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
     while current_radius <= max_radius
       hospitals = app.get_nearest_hospitals(coordinates, radius: current_radius)
-      
+
       if hospitals.empty?
         if options.retry
           style.warning "No hospitals found within #{(current_radius/1609.34).round(1)} miles. Expanding search..."
@@ -75,7 +81,7 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
     # Ask if user wants to search by name
     helper = ACON::Helper::Question.new
     question = ACON::Question::Confirmation.new("Would you like to search for a specific hospital or clinic by name?", true)
-    
+
     if helper.ask(input, output, question)
       search_hospitals_by_name(coordinates, options, style, key, input, output)
     else
@@ -87,12 +93,12 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
   private def search_hospitals_by_name(coordinates, options, style, key, input, output) : ACON::Command::Status
     helper = ACON::Helper::Question.new
     question = ACON::Question(String?).new("Enter hospital or clinic name to search for:", nil)
-    
+
     if answer = helper.ask(input, output, question)
       search_term = answer.to_s
       app = Gmaps::App.new(key)
       hospitals = app.search_hospitals_by_name(search_term, coordinates)
-      
+
       if hospitals.empty?
         style.error "No hospitals found matching '#{search_term}'"
         return ACON::Command::Status::FAILURE

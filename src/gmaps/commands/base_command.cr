@@ -1,7 +1,11 @@
 require "athena-console"
+require "../config"
+require "./hospital_command_helpers"
 
 module Gmaps
   abstract class BaseCommand < ACON::Command
+    include Gmaps::HospitalCommandHelpers
+
     protected def create_style(input, output)
       ACON::Style::Athena.new(input, output)
     end

@@ -13,16 +13,23 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
     self
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
-      .option("radius", value_mode: :optional, description: "Radius in meters (default: 1000)")
+      .option("radius", value_mode: :optional, description: "Radius in meters (default: 1000)", default: "1000")
       .option("output", value_mode: :required, description: "Output filename for the satellite image")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
-    
+
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
-    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style)
+    begin
+      parsed_coordinates = parse_coordinates(options, style)
+    rescue ex : ParseException
+      style.error "Failed to parse coordinates: #{ex.message}"
+      return ACON::Command::Status::FAILURE
+    end
+
+    coordinates = parsed_coordinates.not_nil!
 
     begin
       client = Gmaps::Client.new(key)
@@ -42,22 +49,13 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
   end
 
   private def parse_options(input) : CommandOptions
+    input.validate
+
     CommandOptions.new(
       latitude: input.option("latitude", String),
       longitude: input.option("longitude", String),
-      radius: input.option("radius", String, "1000").to_i,
-      output_file: input.option("output", String)
+      output_file: input.option("output", String),
+      radius: input.option("radius", Int32)
     )
-  end
-
-  private def parse_coordinates(options, style) : Gmaps::LatLon?
-    begin
-      lat = options.latitude.to_f64
-      lon = options.longitude.to_f64
-      Gmaps::LatLon.new(lat, lon)
-    rescue ex
-      style.error "Invalid coordinates. Please provide valid latitude and longitude values."
-      nil
-    end
   end
 end

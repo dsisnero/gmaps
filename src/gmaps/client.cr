@@ -18,8 +18,8 @@ module Gmaps
       dlong = to_radians(long2 - long1)
 
       a = Math.sin(dlat / 2.0) * Math.sin(dlat / 2.0) +
-        Math.cos(to_radians(lat1)) * Math.cos(to_radians(lat2)) *
-        Math.sin(dlong / 2.0) * Math.sin(dlong / 2.0)
+          Math.cos(to_radians(lat1)) * Math.cos(to_radians(lat2)) *
+          Math.sin(dlong / 2.0) * Math.sin(dlong / 2.0)
 
       c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a))
       distance = radius * c
@@ -42,7 +42,8 @@ module Gmaps
     end
 
     def address_lines
-      address.split(",").map(&.strip)
+      return [] of String unless address
+      address.not_nil!.split(",").map(&.strip)
     end
 
     def address_to_adoc(io : IO)
@@ -151,7 +152,7 @@ module Gmaps
           loc = place.location
           address = place.formatted_address || place.vicinity
           hospitals << Hospital.new(name: place.name, place_id: place.place_id,
-                                    latitude: loc.latitude, longitude: loc.longitude, address: address, rating: place.rating)
+            latitude: loc.latitude, longitude: loc.longitude, address: address, rating: place.rating)
         end
       elsif result.status == "ZERO_RESULTS"
         Log.info { "No hospitals found within 100 miles" }
@@ -197,9 +198,9 @@ module Gmaps
 
       url = "/maps/api/staticmap?#{params}"
       Log.debug { "Fetching satellite image with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
-      
+
       resp = http_client.get(url)
-      
+
       if resp.success?
         Log.debug { "Successfully retrieved satellite image" }
         resp.body.to_slice
@@ -211,15 +212,15 @@ module Gmaps
 
     # Helper method to calculate appropriate zoom level based on radius
     private def calculate_zoom_level(radius : Int32) : Int32
-      # Rough approximation: 
+      # Rough approximation:
       # zoom = 14 shows about 3km
       # Each zoom level change doubles/halves the visible area
       base_zoom = 14
       base_radius = 3000
-      
+
       zoom_adjustment = Math.log2(base_radius.to_f / radius)
       calculated_zoom = (base_zoom + zoom_adjustment).round.to_i
-      
+
       # Clamp zoom level between 1 and 20 (Google Maps limits)
       calculated_zoom.clamp(1, 20)
     end
