@@ -83,17 +83,17 @@ module Gmaps
       find_nearest_hospitals(location.latitude, location.longitude, radius)
     end
 
-    def search_hospitals_by_name(query : String, lat : Float64, long : Float64) : Array(Hospital)
-      url = "/maps/api/place/textsearch/json?query=#{URI.encode_www_form(query)}&location=#{lat},#{long}&type=hospital&key=#{@api_key}"
+    def search_hospitals_by_name(query : String, lat : Float64, long : Float64, radius : Float64 = 50000.0) : Array(Hospital)
+      url = "/maps/api/place/findplacefromtext/json?input=#{URI.encode_www_form(query)}&inputtype=textquery&location=#{lat},#{long}&type=hospital&radius=#{radius}&key=#{@api_key}"
       Log.info { "Searching for hospitals matching: #{query}" }
       Log.debug { "Calling Google Places Text Search API with URL (key redacted): #{url.gsub(@api_key, "REDACTED")}" }
-      
+
       resp = http_client.get(url)
       Log.debug { "API Response status: #{resp.status_code}" }
       Log.debug { "API Response body: #{resp.body}" }
-      
+
       if resp.success?
-        hospitals = extract_hospitals(resp.body)
+        hospitals = extract_hospitals(resp.body, PlaceQueryName)
         Log.info { "Found #{hospitals.size} hospitals matching '#{query}'" }
         hospitals
       else
@@ -119,15 +119,28 @@ module Gmaps
       end
     end
 
-    def extract_hospitals(json_result : String) : Array(Hospital)
-      result = PlaceQuery.from_json(json_result)
+    def extract_hospitals(json_result : String, extractor = PlaceQuery) : Array(Hospital)
+      result = extractor.from_json(json_result)
+      case extractor
+      when PlaceQuery
+        places = result.results
+      when PlaceQueryName
+        places = result.candidates
+      end
       hospitals = [] of Hospital
-      return hospitals unless result.status == "OK"
-      places = result.results
-      places.each do |place|
-        loc = place.location
-        hospitals << Hospital.new(name: place.name, place_id: place.place_id,
-          latitude: loc.latitude, longitude: loc.longitude, address: place.vicinity, rating: place.rating)
+      if result.status == "OK"
+        places.each do |place|
+          loc = place.location
+          if address = place.formatted_address || place.vicinity
+            hospitals << Hospital.new(name: place.name, place_id: place.place_id,
+              latitude: loc.latitude, longitude: loc.longitude, address: address, rating: place.rating)
+          else
+            Log.error { "No address found for #{place.name}" }
+          end
+        end
+      else
+        Log.error { "Google Places API call failed with status #{result.status}" }
+        raise "Failed to fetch hospital information using Google Places API: #{result.status}: #{result.error_message}"
       end
 
       # results.each do |result|
