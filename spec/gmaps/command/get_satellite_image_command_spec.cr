@@ -6,7 +6,7 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
     tempfile = File.tempfile("satellite_test.png")
     tester = self.command_tester
 
-    ret = tester.execute({"--latitude" => "40.7128", "--longitude" => "-74.0060", "--output" => tempfile.path})
+    ret = tester.execute({"--latitude" => "40.7128", "--longitude" => "-74.0060", "--output_file" => tempfile.path})
 
     ret.should eq ACON::Command::Status::SUCCESS
     tester.display.should contain "Satellite image saved to"
@@ -15,8 +15,9 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
   end
 
   def test_given_lat_and_lng_in_wrong_format : Nil
+    tempfile = File.tempfile("satellite_test.png")
     tester = self.command_tester
-    ret = tester.execute({"--latitude" => "a", "--longitude" => "b"})
+    ret = tester.execute({"--latitude" => "a", "--longitude" => "b", "--output_file" => tempfile.path})
     ret.should eq ACON::Command::Status::FAILURE
     tester.display.should contain "Failed to parse coordinates"
   end
@@ -24,7 +25,7 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
   def accepts_custom_radius
     tempfile = File.tempfile("satellite_test_wide.png")
     tester = self.command_tester
-    tester.inputs = ["--latitude", "40.7128", "--longitude", "-74.0060", "--radius", "5000", "--output", tempfile.path]
+    tester.inputs = ["--latitude", "40.7128", "--longitude", "-74.0060", "--radius", "5000", "--output_file", tempfile.path]
 
     ret = tester.execute
 
@@ -36,10 +37,10 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
 
   def test_fails_when_no_output_file_specified
     tester = self.command_tester
-    
+
     ret = tester.execute({
-      "--latitude" => "40.7128",
-      "--longitude" => "-74.0060"
+      "--latitude"  => "40.7128",
+      "--longitude" => "-74.0060",
     })
 
     ret.should eq ACON::Command::Status::FAILURE
@@ -58,7 +59,7 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
   #       options: {
   #       "latitude"  => "40.7128",
   #       "longitude" => "-74.0060",
-  #       "output"    => "test.png",
+  #       "output_file"    => "test.png",
   #       }
   #     )
   #
