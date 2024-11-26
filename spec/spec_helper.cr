@@ -16,6 +16,16 @@ SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 
+# Helper module for keyring testing
+module KeyringSpecHelper
+  def with_test_credentials
+    backend = Keyring::WindowsCredentialBackend.new
+    yield backend
+  ensure
+    backend.try &.delete_password("GMapsTest", "test_user") rescue nil
+  end
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
   config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
