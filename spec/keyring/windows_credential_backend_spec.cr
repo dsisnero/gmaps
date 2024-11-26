@@ -1,10 +1,10 @@
 require "../spec_helper"
+require "../../src/keyring/backend"
 require "../../src/keyring/backends/windows_credential_backend"
 
-include KeyringSpecHelper
-
-{% if flag?(:windows) %}
 describe Keyring::WindowsCredentialBackend do
+  include KeyringSpecHelper
+  
   TEST_SERVICE = "GMapsTest"
   TEST_USERNAME = "test_user"
   TEST_PASSWORD = "test_password_123"
