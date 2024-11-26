@@ -5,7 +5,7 @@ require "athena-spec"
 require "athena-console"
 require "athena-console/spec"
 require "vcr"
-require "../src/gmaps/client"
+require "../src/gmaps/app"
 require "../src/gmaps/config"
 require "dotenv"
 require "path"
@@ -23,6 +23,18 @@ end
 
 def load_dotenv
   Dotenv.load
+end
+
+class TestKeyProvider
+  include Gmaps::IKeyProvider
+
+  def initialize(key : String? = nil)
+    @key = key
+  end
+
+  def get_api_key
+    @key
+  end
 end
 
 ASPEC.run_all
