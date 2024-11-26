@@ -11,6 +11,8 @@ targets:
     main: src/gmaps.cr
 
 dependencies:
+  win32cr:
+    github: mjblack/win32cr
   dotenv:
     github: drum445/dotenv
   totem:
