@@ -3,7 +3,7 @@ require "./../../src/gmaps/directions_reporter"
 
 module Gmaps
   class MockReporter < Gmaps::DirectionsFormatter
-    def output_report(route : Gmaps::Route, io : String | IO, heading_level : Int32 = 1)
+    def output_report(hospital : Gmaps::Hospital, route : Gmaps::Route, io : String | IO, heading_level : Int32 = 1)
       io << "My Report"
     end
   end
