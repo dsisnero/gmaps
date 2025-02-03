@@ -18,7 +18,7 @@ require "./support/**"
 
 # Helper module for keyring testing
 module KeyringSpecHelper
-  def with_test_credentials
+  def with_test_credentials(&)
     backend = Keyring::WindowsCredentialBackend.new
     yield backend
   ensure
