@@ -16,7 +16,7 @@ module Gmaps
 
       dlat = to_radians(lat2 - lat1)
       dlong = to_radians(long2 - long1)
-
+      G
       a = Math.sin(dlat / 2.0) * Math.sin(dlat / 2.0) +
           Math.cos(to_radians(lat1)) * Math.cos(to_radians(lat2)) *
           Math.sin(dlong / 2.0) * Math.sin(dlong / 2.0)
@@ -72,6 +72,7 @@ module Gmaps
     getter api_key : String
 
     def initialize(api_key : String)
+      raise NoApiKeyError.new("API key is required and cannot be empty") if api_key.empty?
       @api_key = api_key
       @http_client = HTTP::Client.new("maps.googleapis.com", tls: true, port: 443)
     end
@@ -202,10 +203,13 @@ module Gmaps
         Log.debug { "Successfully retrieved satellite image" }
         resp.body.to_slice
       else
-        Log.error { "Failed to fetch satellite image: #{resp.status_code}" }
-        raise "Failed to fetch satellite image: #{resp.status_code} - #{resp.body}"
+        if resp.status_code == 403 && resp.body.includes? "The provided API key is invalid"
+          raise Gmaps::InvalidApiKeyError.new
+        else
+          Log.error { "Failed to fetch satellite image: #{resp.status_code}" }
+          raise "Failed to fetch satellite image: #{resp.status_code} - #{resp.body}"
+        end
       end
     end
-
   end
 end
