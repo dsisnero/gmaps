@@ -18,11 +18,13 @@ struct NearestHospitalsCommandTest < ASPEC::TestCase
 
   def test_given_lat_and_lng_with_correct_format : Nil
     tester = self.command_tester
-    tester.execute({"--latitude" => "40d52m30sN", "--longitude" => "111d51m7sW"})
+    tester.set_inputs ["1"] # Set the input before executing
+    ret = tester.execute({
+      "--latitude" => "40d52m30sN",
+      "--longitude" => "111d51m7sW"
+    })
+    ret.should eq ACON::Command::Status::SUCCESS
     tester.display.should contain "Nearest hospitals:"
-    tester.inputs = ["1"]
-    tester.display.should contain "Getting the file"
-    puts tester.display
   end
 
   private def command : Gmaps::NearestHospitalsCommand

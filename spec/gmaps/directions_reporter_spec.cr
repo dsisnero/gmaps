@@ -13,9 +13,10 @@ module Gmaps
       route = get_route
       hospital = create_hospital
       reporter = DirectionsReporter.new(MockReporter.new)
-      io = IO::Memory.new
-      reporter.output_report(hospital: hospital, route: route, io: io)
-      io.to_s.should eq "My Report"
+      io = String.build do |str|
+        reporter.output_report(hospital: hospital, route: route, io: str)
+      end
+      io.should eq "My Report"
     end
 
     it "can create a ASCIIdoc report" do
