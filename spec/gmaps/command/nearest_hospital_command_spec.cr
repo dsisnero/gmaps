@@ -18,7 +18,6 @@ struct NearestHospitalsCommandTest < ASPEC::TestCase
 
   def test_given_lat_and_lng_with_correct_format : Nil
     tester = self.command_tester
-    tester.set_inputs ["1"] # Set the input before executing
     ret = tester.execute({
       "--latitude" => "40d52m30sN",
       "--longitude" => "111d51m7sW"
