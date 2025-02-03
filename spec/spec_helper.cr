@@ -16,19 +16,17 @@ SRC       = ROOT / "src"
 TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 
-# Helper module for keyring testing
-module KeyringSpecHelper
-  def with_test_credentials(&)
-    backend = Keyring::WindowsCredentialBackend.new
-    yield backend
-  ensure
-    backend.try &.delete_password("GMapsTest", "test_user") rescue nil
-  end
+# Set up test environment
+Spec.before_each do
+  # Ensure we have a test API key for all tests
+  test_key = "test_api_key_for_specs"
+  test_provider = TestKeyProvider.new(test_key)
+  Gmaps.key_provider = test_provider
 end
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+  config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || "test_api_key_for_specs"
 end
 
 def load_dotenv
@@ -43,7 +41,7 @@ class TestKeyProvider
   end
 
   def get_api_key
-    @key
+    @key || "test_api_key_for_specs"
   end
 end
 
