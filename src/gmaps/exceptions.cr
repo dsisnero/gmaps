@@ -13,5 +13,9 @@ module Gmaps
     end
   end
 
-  class NoApiKeyError < Exception; end
+  class NoApiKeyError < Exception
+    def initialize
+      super("API key is required and cannot be empty")
+    end
+  end
 end

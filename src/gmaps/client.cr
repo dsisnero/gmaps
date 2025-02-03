@@ -114,7 +114,7 @@ module Gmaps
         Log.error { "Google Places API call failed with status #{resp.status_code}" }
         Log.error { "Response body: #{resp.body}" }
         if resp.status_code == 403 && resp.body.includes?("The provided API key is invalid")
-          raise InvalidApiKeyError.new("The provided API key is invalid")
+          raise InvalidApiKeyError.new
         end
         raise "Failed to fetch hospital information using Google Places API: #{resp.body}"
       end
