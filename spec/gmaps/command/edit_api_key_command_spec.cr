@@ -1,8 +1,17 @@
 require "../../spec_helper"
-
 require "../../../src/gmaps/commands/edit_api_key_command"
 
 struct EditApiKeyCommandTest < ASPEC::TestCase
+  class MockConfigLoader < Gmaps::ConfigLoader
+    property last_edited_key : String?
+    property last_edited_value : String?
+    
+    def edit_key(key : String, value : String)
+      @last_edited_key = key
+      @last_edited_value = value
+    end
+  end
+
   def test_given_no_api_key : Nil
     api_key = Gmaps.key_provider.get_api_key
     tester = self.command_tester
@@ -11,14 +20,18 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
   end
 
   def test_given_api_key : Nil
-    orig_key = Gmaps.key_provider.get_api_key
-    tester = self.command_tester
+    mock_loader = MockConfigLoader.new
+    command = Gmaps::EditApiKeyCommand.new
+    command.config_loader = mock_loader
+    
+    tester = ACON::Spec::CommandTester.new(command)
     provided_key = "a"
+    
     tester.execute gmaps_api_key: provided_key
+    
     tester.display.should contain "API key updated"
-    new_key = Gmaps.key_provider.get_api_key
-    new_key.should eq provided_key
-    tester.execute gmaps_api_key: orig_key
+    mock_loader.last_edited_key.should eq "GMAPS_API_KEY"
+    mock_loader.last_edited_value.should eq provided_key
   end
 
   private def command : Gmaps::EditApiKeyCommand
