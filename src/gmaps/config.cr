@@ -4,12 +4,6 @@ require "./exceptions"
 require "secrets"
 
 module Gmaps
-  ROOT = Path["."].parent.expand
-
-  def self.get_api_key : String?
-    api_key = ENV["GMAPS_API_KEY"]? || config.gmaps_api_key
-  end
-
   def self.config
     Config.load_from_config
   end
@@ -36,7 +30,7 @@ module Gmaps
       Config.from_yaml(loader.to_yaml)
     end
 
-    def initialize(@gmaps_api_key : String)
+    def initialize(@gmaps_api_key : String = "")
     end
   end
 
@@ -75,9 +69,9 @@ module Gmaps
     #
     # Params:
     # + api_key (String) - The new API key to store
-    def edit_key(api_key : String)
+    def edit_key(key : String, value : String)
       secrets = Secrets.new(config_file.to_s, keyfile.to_s)
-      secrets["gmaps_api_key"] = api_key
+      secrets[key] = value
       secrets.save
     end
 
@@ -89,12 +83,12 @@ module Gmaps
     #
     # Returns:
     # + (String) - The API key
-    def get_key
+    def get_key(key)
       secrets = Secrets.new(config_file.to_s, keyfile.to_s)
-      if secret = secrets["gmaps_api_key"]?
+      if secret = secrets[key]?
         secret.as_s
       else
-        raise ConfigError.new("No gmaps_api_key found")
+        raise ConfigError.new("No #{key} found")
       end
     end
 
@@ -102,13 +96,15 @@ module Gmaps
     #
     # Returns:
     # + (String | Nil) - The API key or nil if not found
-    def get_key?
+    def get_key?(key)
       secrets = Secrets.new(config_file.to_s, keyfile.to_s)
-      if secret = secrets["api_key"]?
+      if secret = secrets[key]?
         secret.as_s
       else
         nil
       end
+    rescue ex
+      puts ex.message
     end
 
     def to_yaml

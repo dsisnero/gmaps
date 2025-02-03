@@ -19,18 +19,21 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
+    begin
+      api_key = Gmaps.key_provider.get_api_key
+      if api_key.nil?
+        handle_no_api_key(style, input, output)
+      end
 
-    return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
-    begin
+      api_key = api_key.not_nil!
+
       options = parse_options(input)
+      parsed_coordinates = parse_coordinates(options)
     rescue ex : ACON::Exceptions::InvalidArgument
-      style.error "#{ex.message}"
+      style.not_nil!.error "#{ex.message}"
       return ACON::Command::Status::FAILURE
-    end
-    begin
-      parsed_coordinates = parse_coordinates(options, style)
     rescue ex : ParseException
-      style.error "Failed to parse coordinates: #{ex.message}"
+      style.not_nil!.error "Failed to parse coordinates: #{ex.message}"
       return ACON::Command::Status::FAILURE
     end
 
@@ -44,7 +47,7 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
     end
 
     begin
-      client = Gmaps::Client.new(key)
+      client = Gmaps::Client.new(api_key)
       image_data = client.get_satellite_image(
         coordinates.latitude,
         coordinates.longitude,
@@ -54,6 +57,12 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
       File.write(options.output_file, image_data)
       style.success "Satellite image saved to #{options.output_file} (zoom level: #{zoom})"
       ACON::Command::Status::SUCCESS
+    rescue ex : Gmaps::NoApiKeyError
+      style.error ex.message.not_nil!
+      ACON::Command::Status::FAILURE
+    rescue ex : Gmaps::InvalidApiKeyError
+      style.error ex.message.not_nil!
+      ACON::Command::Status::FAILURE
     rescue ex
       style.error "Failed to get satellite image: #{ex.message}"
       ACON::Command::Status::FAILURE

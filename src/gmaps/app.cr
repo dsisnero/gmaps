@@ -1,12 +1,13 @@
 require "poncho"
+require "./key_provider"
 require "./client"
 require "./coordinate_parser"
 require "./directions_reporter"
-require "./config"
 
 module Gmaps
   class App
-    Log = ::Log.for("app")
+    ROOT = Path["."].parent.expand
+    Log  = ::Log.for("app")
 
     # Client for interacting with Google Maps API
     getter client : Gmaps::Client

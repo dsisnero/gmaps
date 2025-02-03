@@ -5,7 +5,7 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
   class MockConfigLoader < Gmaps::ConfigLoader
     property last_edited_key : String?
     property last_edited_value : String?
-    
+
     def edit_key(key : String, value : String)
       @last_edited_key = key
       @last_edited_value = value
@@ -14,7 +14,7 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
 
   def test_given_no_api_key : Nil
     api_key = Gmaps.key_provider.get_api_key
-    tester = self.command_tester
+    tester = command_tester
     expect_raises(ACON::Exceptions::ValidationFailed, "gmaps_api_key") { tester.execute }
     Gmaps.key_provider.get_api_key.should eq api_key
   end
@@ -23,12 +23,12 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
     mock_loader = MockConfigLoader.new
     command = Gmaps::EditApiKeyCommand.new
     command.config_loader = mock_loader
-    
+
     tester = ACON::Spec::CommandTester.new(command)
     provided_key = "a"
-    
+
     tester.execute gmaps_api_key: provided_key
-    
+
     tester.display.should contain "API key updated"
     mock_loader.last_edited_key.should eq "GMAPS_API_KEY"
     mock_loader.last_edited_value.should eq provided_key
@@ -39,6 +39,6 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
   end
 
   private def command_tester : ACON::Spec::CommandTester
-    ACON::Spec::CommandTester.new self.command
+    ACON::Spec::CommandTester.new command
   end
 end

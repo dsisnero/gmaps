@@ -27,8 +27,8 @@ describe Gmaps::ConfigLoader do
   it "can get and set the API key" do
     with_tempfile("mydir") do |path|
       config_loader = Gmaps::ConfigLoader.new(path)
-      config_loader.edit_key("TEST_KEY")
-      config_loader.get_key.should eq "TEST_KEY"
+      config_loader.edit_key("TEST_KEY", "my_key_value")
+      config_loader.get_key("TEST_KEY").should eq "my_key_value"
     end
   end
 
@@ -37,7 +37,7 @@ describe Gmaps::ConfigLoader do
     with_tempfile("mydir") do |path|
       config_loader = Gmaps::ConfigLoader.new(path)
       File.basename(config_loader.config_file).should eq "config.yml.enc"
-      config_loader.edit_key("TEST_KEY")
+      config_loader.edit_key("TEST_KEY", "my_key_value")
       encrypted_content = File.read(config_loader.config_file)
       puts "Encrypted content:\n#{encrypted_content}"
       encrypted_content.should_not contain "TEST_KEY" # The key should not be visible in plain text
@@ -49,7 +49,7 @@ describe Gmaps::ConfigLoader do
   it "errors if no key set yet" do
     with_tempfile("mydir") do |path|
       config_loader = Gmaps::ConfigLoader.new(path)
-      expect_raises(Gmaps::ConfigError) { config_loader.get_key }
+      expect_raises(Gmaps::ConfigError) { config_loader.get_key("GMAPS_API_KEY") }
     end
   end
 

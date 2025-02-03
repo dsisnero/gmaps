@@ -72,7 +72,7 @@ module Gmaps
     getter api_key : String
 
     def initialize(api_key : String)
-      raise NoApiKeyError.new("API key is required and cannot be empty") if api_key.empty?
+      raise NoApiKeyError.new if api_key.empty?
       @api_key = api_key
       @http_client = HTTP::Client.new("maps.googleapis.com", tls: true, port: 443)
     end
@@ -114,7 +114,7 @@ module Gmaps
         Log.error { "Google Places API call failed with status #{resp.status_code}" }
         Log.error { "Response body: #{resp.body}" }
         if resp.status_code == 403 && resp.body.includes?("The provided API key is invalid")
-          raise InvalidApiKeyError.new
+          raise InvalidApiKeyError.new(api_key)
         end
         raise "Failed to fetch hospital information using Google Places API: #{resp.body}"
       end
@@ -163,7 +163,7 @@ module Gmaps
         return hospitals
       elsif result.status == "REQUEST_DENIED" && result.error_message.try(&.includes?("API key is invalid"))
         Log.error { "Invalid API key" }
-        raise InvalidApiKeyError.new("The provided API key is invalid")
+        raise InvalidApiKeyError.new(api_key)
       else
         Log.error { "Google Places API call failed with status #{result.status}" }
         raise "Failed to fetch hospital information using Google Places API: #{result.status}: #{result.error_message}"
@@ -210,7 +210,7 @@ module Gmaps
         resp.body.to_slice
       else
         if resp.status_code == 403 && resp.body.includes? "The provided API key is invalid"
-          raise Gmaps::InvalidApiKeyError.new
+          raise Gmaps::InvalidApiKeyError.new(api_key)
         else
           Log.error { "Failed to fetch satellite image: #{resp.status_code}" }
           raise "Failed to fetch satellite image: #{resp.status_code} - #{resp.body}"

@@ -3,7 +3,11 @@
 /bin/
 /.shards/
 *.dwarf
+spec/fixtures/vcr_cassettes/**/*
 
 # Libraries don't need dependency lock
 # Dependencies will be locked in applications that use them
 /shard.lock
+.aider*
+.env
+C:\Users\DOMINI~1\AppData\Local\Temp\cr-spec-b6728d47\config\mydir\master.keyC:\Users\DOMINI~1\AppData\Local\Temp\cr-spec-9a60b9b2\config\mydir\master.keyC:\Users\DOMINI~1\AppData\Local\Temp\cr-spec-c448fdc5\config\mydir\master.key

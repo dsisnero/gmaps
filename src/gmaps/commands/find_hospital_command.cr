@@ -13,7 +13,7 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
     map_filename : String
 
   protected def configure : Nil
-    self
+    super
       .argument("name", mode: :required, description: "Hospital name to search for")
       .option("latitude", value_mode: :required, description: "Latitude coordinate")
       .option("longitude", value_mode: :required, description: "Longitude coordinate")
@@ -26,13 +26,13 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
 
     if input.arguments.empty?
       style.error "Hospital name argument is required"
-      output.puts self.help
+      output.puts help
       return ACON::Command::Status::FAILURE
     end
 
     return ACON::Command::Status::FAILURE unless key = verify_api_key(output)
     return ACON::Command::Status::FAILURE unless options = parse_options(input)
-    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options, style)
+    return ACON::Command::Status::FAILURE unless coordinates = parse_coordinates(options)
 
     process_hospital_search(options.name, coordinates, options, style, key, input, output)
   end

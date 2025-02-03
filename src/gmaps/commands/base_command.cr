@@ -1,5 +1,5 @@
 require "athena-console"
-require "../config"
+require "../key_provider"
 require "./hospital_command_helpers"
 
 module Gmaps
@@ -10,13 +10,8 @@ module Gmaps
       ACON::Style::Athena.new(input, output)
     end
 
-    protected def verify_api_key(output) : String?
-      key = Gmaps.get_api_key
-      unless key
-        output.puts "No API key found. Please run `gmaps edit_api_key`"
-        return nil
-      end
-      key
+    protected def configure : Nil
+              self.option("api_key", value_mode: :required, description: "API key")
     end
   end
 end

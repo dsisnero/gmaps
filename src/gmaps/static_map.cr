@@ -95,7 +95,7 @@ module Gmaps
     def initialize(@api_key = nil, @size = "640x640", @center = "0,0", @zoom = 0, @path = nil, @scale = nil)
     end
 
-    def self.build
+    def self.build(&)
       map = new
       yield map
       map
