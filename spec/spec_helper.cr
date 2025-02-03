@@ -26,11 +26,11 @@ end
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data("<API_KEY>") { "test_api_key_for_specs" }
-  config.default_cassette_options = {
-    :record => :new_episodes,
-    :match_requests_on => [:method, :uri]
-  }
+  config.filter_sensitive_data["key"]=  "<API_KEY>" 
+  # config.default_cassette_options = {
+  #   :record => :new_episodes,
+  #   :match_requests_on => [:method, :uri]
+  # }
 end
 
 def load_dotenv
