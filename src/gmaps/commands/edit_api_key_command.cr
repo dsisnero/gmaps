@@ -6,18 +6,11 @@ class Gmaps::EditApiKeyCommand < ACON::Command
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
-    # if config_file_exists? and master_keyfile exists
-    # load config_file and update api_key
-    # else generate new config file and master_keyfile and update api_key
-    if api_key = input.argument("gmaps_api_key", String)
-      loader = ConfigLoader.new
-      loader.edit_key(api_key)
-      output.puts "API key updated in #{loader.config_file}"
-      ACON::Command::Status::SUCCESS
-    else
-      output.puts "No API key provided"
-      ACON::Command::Status::FAILURE
-    end
+    api_key = input.argument("gmaps_api_key", String)
+    loader = ConfigLoader.new
+    loader.edit_key("GMAPS_API_KEY", api_key)
+    output.puts "API key updated in #{loader.config_file}"
+    ACON::Command::Status::SUCCESS
   end
 end
 
