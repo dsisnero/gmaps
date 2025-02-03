@@ -20,9 +20,8 @@ describe Gmaps::Client do
   describe "with valid API key" do
     describe "#search_hospitals_by_name" do
       it "returns hospitals matching search query" do
-        VCR.use_cassette("search_hospitals_bellevue") do
-          api_key = Gmaps.key_provider.get_api_key.not_nil!
-          client = Gmaps::Client.new(api_key)
+        VCR.use_cassette("search_hospitals_bellevue", record: :new_episodes) do
+          client = Gmaps::Client.new("test_api_key_for_specs")
 
           hospitals = client.search_hospitals_by_name("Bellevue", 40.7128, -74.0060)
           hospitals.size.should be > 0

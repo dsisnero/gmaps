@@ -18,15 +18,19 @@ require "./support/**"
 
 # Set up test environment
 Spec.before_each do
-  # Ensure we have a test API key for all tests
-  test_key = "test_api_key_for_specs"
-  test_provider = TestKeyProvider.new(test_key)
+  # Use a consistent API key for VCR cassettes
+  ENV["GMAPS_API_KEY"] = "test_api_key_for_specs"
+  test_provider = TestKeyProvider.new(ENV["GMAPS_API_KEY"])
   Gmaps.key_provider = test_provider
 end
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data["GMAPS_API_KEY"] = ENV["GMAPS_API_KEY"]? || "test_api_key_for_specs"
+  config.filter_sensitive_data("<API_KEY>") = "test_api_key_for_specs"
+  config.default_cassette_options = {
+    :record => :new_episodes,
+    :match_requests_on => [:method, :uri]
+  }
 end
 
 def load_dotenv
