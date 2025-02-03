@@ -25,22 +25,22 @@ end
 INVALID_API_KEY = "invalid_test_api_key_123"
 
 # Helper to set up API key for tests
-def with_api_key(key : String)
+def with_api_key(key : String, &)
   original_provider = Gmaps.key_provider
   test_provider = TestKeyProvider.new(key)
   Gmaps.key_provider = test_provider
   yield
 ensure
-  Gmaps.key_provider = original_provider
+  Gmaps.key_provider = original_provider.not_nil!
 end
 
 # Helper to run test with valid API key
-def with_valid_api_key
+def with_valid_api_key(&)
   with_api_key(VALID_API_KEY) { yield }
 end
 
 # Helper to run test with invalid API key
-def with_invalid_api_key
+def with_invalid_api_key(&)
   with_api_key(INVALID_API_KEY) { yield }
 end
 
@@ -53,10 +53,6 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
   config.filter_sensitive_data["key"] = "<API_KEY>"
-  config.default_cassette_options = {
-    :record => :new_episodes,
-    :match_requests_on => [:method, :uri]
-  }
 end
 
 def load_dotenv
