@@ -8,8 +8,8 @@ module Gmaps
   end
 
   class InvalidApiKeyError < Exception
-    def initialize
-      super("The provided API key is invalid")
+    def initialize(key)
+      super("The provided API key #{key} is invalid")
     end
   end
 

@@ -3,10 +3,15 @@ require "../../src/gmaps/app"
 
 describe Gmaps::Client do
   describe "with invalid API key" do
+  describe "#search_hospitals_by_name" do
     it "raises an error" do
       VCR.use_cassette("edit_api_invalid_key") do
+          client = Gmaps::Client.new("invalid_api_key")
+
         expect_raises(Gmaps::InvalidApiKeyError) do
-          Gmaps::Client.new("invalid_api_key")
+           client.search_hospitals_by_name("Bellevue", 40.7128,-74.0060)
+        end
+
         end
       end
     end
