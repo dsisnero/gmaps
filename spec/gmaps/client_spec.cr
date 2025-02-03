@@ -21,7 +21,7 @@ describe Gmaps::Client do
       describe "#search_hospitals_by_name" do
         it "returns hospitals matching search query" do
           VCR.use_cassette("search_hospitals_bellevue") do
-            client = Gmaps::Client.new("test_api_key_for_specs")
+            client = Gmaps::Client.new(VALID_API_KEY)
 
             hospitals = client.search_hospitals_by_name("Bellevue", 40.7128, -74.0060)
             hospitals.size.should be > 0
@@ -42,8 +42,7 @@ describe Gmaps::Client do
 
         it "returns empty array when no hospitals found" do
           VCR.use_cassette("search_hospitals_nonexistent") do
-            api_key = Gmaps.key_provider.get_api_key.not_nil!
-            client = Gmaps::Client.new(api_key)
+            client = Gmaps::Client.new(VALID_API_KEY)
 
             hospitals = client.search_hospitals_by_name("XXXXXXXXXXXXXXXXXXXXXXXXXXX_NONEXISTENT_HOSPITAL_NAME_123456789", 40.7128, -74.0060)
             hospitals.should be_empty
@@ -54,8 +53,7 @@ describe Gmaps::Client do
       describe "#find_nearest_hospitals" do
         it "returns nearby hospitals" do
           VCR.use_cassette("find_nearest_hospitals") do
-            api_key = Gmaps.key_provider.get_api_key.not_nil!
-            client = Gmaps::Client.new(api_key)
+            client = Gmaps::Client.new(VALID_API_KEY)
 
             # Using coordinates for New York City
             hospitals = client.find_nearest_hospitals(40.7128, -74.0060)
