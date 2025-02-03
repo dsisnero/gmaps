@@ -29,51 +29,46 @@ Before using this tool, make sure you have the following prerequisites installed
 
 ### Setting Up Google Cloud APIs
 
-To use Google Cloud APIs, you'll need to access the Google Cloud Console and follow these steps:
+To use Google Cloud APIs, you'll need to:
 
-1. **Access the Google Cloud Console**:
+1. **Get an API Key**:
 
-   Go to the following URL to access the Google Cloud Console:
-   [Google Cloud Console](https://console.cloud.google.com/)
+   1. Access the [Google Cloud Console](https://console.cloud.google.com/)
+   2. Create or select a project
+   3. Enable the required APIs:
+      - Google Maps JavaScript API
+      - Google Places API
+      - Directions API
+      - Geocoding API
+   4. Create credentials (API Key) in "APIs & Services" > "Credentials"
+   5. Optionally restrict your API key for security
 
-2. **Log In or Sign Up**:
+2. **Configure Your API Key**:
 
-   If you already have a Google account, you can log in using your existing credentials. If you don't have a Google account, you'll need to sign up for one.
+   You have two options to configure your API key:
 
-3. **Create or Select a Project**:
+   a. Environment Variable:
+   ```bash
+   export GOOGLE_MAPS_API_KEY="your-api-key-here"
+   ```
 
-   - If you don't already have a project, you can create a new one.
-   - If you have an existing project, you can select it from the list.
+   b. Permanent Configuration:
+   ```bash
+   gmaps edit_api_key your-api-key-here
+   ```
+   This will securely store your API key in an encrypted configuration file.
 
-4. **Enable APIs**:
+3. **Using the Commands**:
 
-   - Click on the "Navigation menu" (the three horizontal lines in the upper left corner).
-   - Under "APIs & Services," click on "Library."
+   Find nearest hospitals:
+   ```bash
+   gmaps nearest_hospital --lat <latitude> --lng <longitude>
+   ```
 
-5. **Search for and Enable APIs**:
-
-   In the Library page, search for the specific APIs you need (e.g., "Google Maps JavaScript API," "Google Places API," "Directions API," "Geocoding API"):
-
-   - Use the search bar at the top to find the API you want to enable.
-   - Click on the API.
-   - Click the "Enable" button.
-
-6. **Create Credentials**:
-
-   - In the Google Cloud Console, navigate to "APIs & Services" > "Credentials."
-   - Click on "Create Credentials" and choose the appropriate credential type based on your use case. For most API access, select "API Key." Follow the on-screen instructions to create and configure the key.
-
-7. **Restrict API Key (if necessary)**:
-
-   For security purposes, consider restricting your API key to specific APIs, IP addresses, or usage limits. You can configure these restrictions in the "API Key" settings.
-
-Once you've completed these steps, you'll have set up Google Cloud APIs and obtained the necessary credentials to access them. You can then use these credentials in your code to interact with the enabled APIs, whether it's for maps, geocoding, or other services.
-
-have a ENV["API_KEY"] with the api key from google
-
-```bash
-nearest_hospital --lat <latitude> --lng <longitude>
-```
+   Get a satellite image:
+   ```bash
+   gmaps get_satellite_image --lat <latitude> --lng <longitude> --output_file <path>
+   ```
 
 ## Contributing
 
