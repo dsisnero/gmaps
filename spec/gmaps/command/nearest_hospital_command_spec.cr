@@ -6,7 +6,7 @@ struct NearestHospitalsCommandTest < ASPEC::TestCase
   def test_given_no_lat_and_lng : Nil
     tester = self.command_tester
     ret = tester.execute
-    tester.display.should contain "Usage:"
+    tester.display.should contain "Failed to parse coordinates:"
   end
 
   def test_given_lat_and_lng_in_wrong_format : Nil

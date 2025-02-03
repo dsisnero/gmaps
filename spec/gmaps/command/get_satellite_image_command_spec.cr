@@ -48,18 +48,15 @@ struct GetSatelliteImageCommandTest < ASPEC::TestCase
   end
 
   def test_given_no_api_key
+    Gmaps.key_provider = TestKeyProvider.new
     tester = self.command_tester
+    tester.inputs = ["--latitude", "40.7128", "--longitude", "-74.0060", "--output_file", "test.png"]
+    key_provider = TestKeyProvider.new
 
-    with_env(GMAPS_API_KEY: nil) do
-      ret = tester.execute({
-        "--latitude" => "40.7128",
-        "--longitude" => "-74.0060",
-        "--output_file" => "test.png"
-      })
+    ret = tester.execute
 
-      ret.should eq ACON::Command::Status::FAILURE
-      tester.display.should contain "API key not found"
-    end
+    ret.should eq ACON::Command::Status::FAILURE
+    tester.display.should contain "API key not found"
   end
 
   private def command : Gmaps::GetSatelliteImageCommand
