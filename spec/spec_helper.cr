@@ -17,20 +17,46 @@ TEST_DATA = TEST_ROOT / "testdata"
 require "./support/**"
 
 # Set up test environment
+VALID_API_KEY = begin
+  key = ENV["GMAPS_API_KEY"]? || Gmaps.config.gmaps_api_key
+  key.empty? ? "valid_test_api_key" : key
+end
+
+INVALID_API_KEY = "invalid_test_api_key_123"
+
+# Helper to set up API key for tests
+def with_api_key(key : String)
+  original_provider = Gmaps.key_provider
+  test_provider = TestKeyProvider.new(key)
+  Gmaps.key_provider = test_provider
+  yield
+ensure
+  Gmaps.key_provider = original_provider
+end
+
+# Helper to run test with valid API key
+def with_valid_api_key
+  with_api_key(VALID_API_KEY) { yield }
+end
+
+# Helper to run test with invalid API key
+def with_invalid_api_key
+  with_api_key(INVALID_API_KEY) { yield }
+end
+
 Spec.before_each do
-  # Use a consistent API key for VCR cassettes
-  ENV["GMAPS_API_KEY"] = "test_api_key_for_specs"
-  test_provider = TestKeyProvider.new(ENV["GMAPS_API_KEY"])
+  # Default to valid API key unless specifically changed in test
+  test_provider = TestKeyProvider.new(VALID_API_KEY)
   Gmaps.key_provider = test_provider
 end
 
 VCR.configure do |config|
   config.cassette_library_dir = "#{TEST_ROOT}/fixtures/vcr_cassettes"
-  config.filter_sensitive_data["key"]=  "<API_KEY>" 
-  # config.default_cassette_options = {
-  #   :record => :new_episodes,
-  #   :match_requests_on => [:method, :uri]
-  # }
+  config.filter_sensitive_data["key"] = "<API_KEY>"
+  config.default_cassette_options = {
+    :record => :new_episodes,
+    :match_requests_on => [:method, :uri]
+  }
 end
 
 def load_dotenv
@@ -45,7 +71,7 @@ class TestKeyProvider
   end
 
   def get_api_key
-    @key || "test_api_key_for_specs"
+    @key
   end
 end
 
