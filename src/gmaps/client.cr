@@ -113,6 +113,9 @@ module Gmaps
       else
         Log.error { "Google Places API call failed with status #{resp.status_code}" }
         Log.error { "Response body: #{resp.body}" }
+        if resp.status_code == 403 && resp.body.includes?("The provided API key is invalid")
+          raise InvalidApiKeyError.new("The provided API key is invalid")
+        end
         raise "Failed to fetch hospital information using Google Places API: #{resp.body}"
       end
     end
@@ -158,6 +161,9 @@ module Gmaps
       elsif result.status == "ZERO_RESULTS"
         Log.info { "No hospitals found within 100 miles" }
         return hospitals
+      elsif result.status == "REQUEST_DENIED" && result.error_message.try(&.includes?("API key is invalid"))
+        Log.error { "Invalid API key" }
+        raise InvalidApiKeyError.new("The provided API key is invalid")
       else
         Log.error { "Google Places API call failed with status #{result.status}" }
         raise "Failed to fetch hospital information using Google Places API: #{result.status}: #{result.error_message}"
