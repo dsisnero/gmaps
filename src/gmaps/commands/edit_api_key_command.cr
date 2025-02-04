@@ -10,12 +10,10 @@ class Gmaps::EditApiKeyCommand < Gmaps::BaseCommand
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
     style = create_style(input, output)
 
-    unless input.has_argument?("api_key")
+    if !input.has_argument?("api_key")
       style.error "Need to provide argument 'api_key'"
       return ACON::Command::Status::FAILURE
-    end
-
-    if api_key = input.argument("api_key", String?)
+    elsif api_key = input.argument("api_key", String?)
       @config_loader.edit_key("GMAPS_API_KEY", api_key)
       style.success "API key updated in #{@config_loader.config_file}"
       ACON::Command::Status::SUCCESS
@@ -23,8 +21,6 @@ class Gmaps::EditApiKeyCommand < Gmaps::BaseCommand
       style.error "Invalid API key provided"
       ACON::Command::Status::FAILURE
     end
-    style.success "API key updated in #{@config_loader.config_file}"
-    ACON::Command::Status::SUCCESS
   end
 
 end
