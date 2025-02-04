@@ -15,7 +15,8 @@ class Gmaps::EditApiKeyCommand < Gmaps::BaseCommand
       return ACON::Command::Status::FAILURE
     end
 
-    api_key = input.argument("api_key", String)
+    api_key = input.argument?("api_key").try(&.to_s)
+    return ACON::Command::Status::FAILURE unless api_key
     @config_loader.edit_key("GMAPS_API_KEY", api_key)
     style.success "API key updated in #{@config_loader.config_file}"
     ACON::Command::Status::SUCCESS
