@@ -19,5 +19,6 @@ class Gmaps::EditApiKeyCommand < Gmaps::BaseCommand
     @config_loader.edit_key("GMAPS_API_KEY", api_key)
     style.success "API key updated in #{@config_loader.config_file}"
     ACON::Command::Status::SUCCESS
+  end
 
 end
