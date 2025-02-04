@@ -10,15 +10,14 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
     output_file : String
 
   protected def configure : Nil
-    self
-      .option("latitude", value_mode: :required, description: "Latitude coordinate")
-      .option("longitude", value_mode: :required, description: "Longitude coordinate")
-      .option("zoom", value_mode: :optional, description: "Zoom level (1-20, default: 19)", default: "19")
-      .option("output_file", value_mode: :required, description: "Output filename for the satellite image")
+    option("latitude", value_mode: :required, description: "Latitude coordinate")
+    option("longitude", value_mode: :required, description: "Longitude coordinate")
+    option("zoom", value_mode: :optional, description: "Zoom level (1-20, default: 19)", default: "19")
+    option("output_file", value_mode: :required, description: "Output filename for the satellite image")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status
-    style = create_style(input, output)
+    style = create_style(input, output).not_nil!
     begin
       api_key = Gmaps.key_provider.get_api_key
       if api_key.nil?
@@ -29,7 +28,7 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
 
       options = parse_options(input)
       parsed_coordinates = parse_coordinates(options)
-    rescue ex : ACON::Exceptions::InvalidArgument
+    rescue ex : Athena::Console::Exception::InvalidOption
       style.not_nil!.error "#{ex.message}"
       return ACON::Command::Status::FAILURE
     rescue ex : ParseException
@@ -74,17 +73,17 @@ class Gmaps::GetSatelliteImageCommand < Gmaps::BaseCommand
 
     output_file = input.option("output_file", String)
     if output_file.empty?
-      raise ACON::Exceptions::InvalidOption.new("Output file is required")
+      raise Athena::Console::Exception::InvalidOption.new("Output file is required")
     end
 
     latitude = input.option("latitude", String)
     if latitude.empty?
-      raise ACON::Exceptions::InvalidOption.new("Latitude is required")
+      raise Athena::Console::Exception::InvalidOption.new("Latitude is required")
     end
 
     longitude = input.option("longitude", String)
     if longitude.empty?
-      raise ACON::Exceptions::InvalidOption.new("Longitude is required")
+      raise Athena::Console::Exception::InvalidOption.new("Longitude is required")
     end
 
     CommandOptions.new(

@@ -15,8 +15,8 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
   def test_given_no_api_key : Nil
     api_key = Gmaps.key_provider.get_api_key
     tester = command_tester
-    expect_raises(ACON::Exceptions::ValidationFailed, "gmaps_api_key") { tester.execute }
-    Gmaps.key_provider.get_api_key.should eq api_key
+    tester.execute interactive: true
+    tester.display.should contain "Need to provide argument 'api_key'"
   end
 
   def test_given_api_key : Nil
@@ -27,7 +27,7 @@ struct EditApiKeyCommandTest < ASPEC::TestCase
     tester = ACON::Spec::CommandTester.new(command)
     provided_key = "a"
 
-    tester.execute gmaps_api_key: provided_key
+    tester.execute interactive: true, api_key: provided_key
 
     tester.display.should contain "API key updated"
     mock_loader.last_edited_key.should eq "GMAPS_API_KEY"

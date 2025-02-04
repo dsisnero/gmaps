@@ -14,11 +14,11 @@ class Gmaps::NearestHospitalsCommand < Gmaps::BaseCommand
 
   protected def configure : Nil
     super()
-      self.option("latitude", value_mode: :required, description: "Latitude coordinate")
-      self.option("longitude", value_mode: :required, description: "Longitude coordinate")
-      self.option("directions_filename", value_mode: :required, description: "Filename for directions")
-      self.option("map_filename", value_mode: :required, description: "Filename for map")
-      self.option("retry", description: "Retry with increased radius if no hospitals found")
+    option("latitude", value_mode: :required, description: "Latitude coordinate")
+    option("longitude", value_mode: :required, description: "Longitude coordinate")
+    option("directions_filename", value_mode: :required, description: "Filename for directions")
+    option("map_filename", value_mode: :required, description: "Filename for map")
+    option("retry", description: "Retry with increased radius if no hospitals found")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status

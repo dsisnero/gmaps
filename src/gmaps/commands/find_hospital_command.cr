@@ -13,12 +13,12 @@ class Gmaps::FindHospitalCommand < Gmaps::BaseCommand
     map_filename : String
 
   protected def configure : Nil
-    super
-      .argument("name", mode: :required, description: "Hospital name to search for")
-      .option("latitude", value_mode: :required, description: "Latitude coordinate")
-      .option("longitude", value_mode: :required, description: "Longitude coordinate")
-      .option("directions_filename", value_mode: :required, description: "Filename for directions")
-      .option("map_filename", value_mode: :required, description: "Filename for map")
+    super()
+      argument("name", mode: :required, description: "Hospital name to search for")
+      option("latitude", value_mode: :required, description: "Latitude coordinate")
+      option("longitude", value_mode: :required, description: "Longitude coordinate")
+      option("directions_filename", value_mode: :required, description: "Filename for directions")
+      option("map_filename", value_mode: :required, description: "Filename for map")
   end
 
   protected def execute(input : ACON::Input::Interface, output : ACON::Output::Interface) : ACON::Command::Status

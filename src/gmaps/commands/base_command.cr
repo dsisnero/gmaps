@@ -7,11 +7,11 @@ module Gmaps
     include Gmaps::HospitalCommandHelpers
 
     protected def create_style(input, output)
-      ACON::Style::Athena.new(input, output)
+      ACON::Style::Athena.new(input, output).not_nil!
     end
 
     protected def configure : Nil
-              self.option("api_key", value_mode: :required, description: "API key")
+      option("api_key", value_mode: :required, description: "API key")
     end
   end
 end
